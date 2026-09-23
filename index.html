@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tủ tài liệu số – KHCN, ĐMST, CĐS, Đề án 06 & Lý lịch tư pháp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F4F1; --surface:#FFFFFF; --ink:#17231E; --muted:#5C6B63; --rule:#D5DBD5;
+  --green:#1E5A43; --green-soft:#E3EEE8; --gold:#B8912F;
+  --t-nq:#1E5A43; --t-qd:#2F4F7A; --t-luat:#7A2F35; --t-nd:#6B5A1E; --t-tt:#5B3F7A; --t-ct:#1F6B75; --t-kh:#555;
+  --sans:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif:"Noto Serif", Georgia, "Times New Roman", serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101714; --surface:#17211D; --ink:#E4EBE7; --muted:#9AAAA1; --rule:#2A3832;
+    --green:#6DB892; --green-soft:#1D2E27; --gold:#D6B460;
+    --t-nq:#3F8A68; --t-qd:#4A6FA3; --t-luat:#A34E56; --t-nd:#94803A; --t-tt:#8566A8; --t-ct:#3C9AA6; --t-kh:#6d6d6d;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101714; --surface:#17211D; --ink:#E4EBE7; --muted:#9AAAA1; --rule:#2A3832;
+  --green:#6DB892; --green-soft:#1D2E27; --gold:#D6B460;
+  --t-nq:#3F8A68; --t-qd:#4A6FA3; --t-luat:#A34E56; --t-nd:#94803A; --t-tt:#8566A8; --t-ct:#3C9AA6; --t-kh:#6d6d6d;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+header.top{padding:28px 0 18px}
+.unit{font-size:13px;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.unit svg{flex:none}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(28px,7vw,38px);line-height:1.15;margin:0 0 8px;letter-spacing:-.01em}
+.lede{margin:0;color:var(--muted);max-width:56ch}
+
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Library */
+.tools{padding:12px 0 4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
+.search{width:100%;font:16px var(--sans);padding:12px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font:500 14px var(--sans);padding:7px 13px;border-radius:999px;cursor:pointer}
+.chips-type{padding-top:4px}
+.chips-type .chip{font-size:13px;padding:5px 11px}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--surface)}
+.count{font-size:13px;color:var(--muted);margin:10px 0 0}
+
+.docs{list-style:none;margin:0;padding:36px 0 40px;display:flex;flex-direction:column;gap:30px}
+.folder{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:0 10px 10px 10px}
+.tab{position:absolute;left:-1px;top:-24px;height:24px;padding:3px 12px 0;border-radius:8px 8px 0 0;color:#fff;font:600 12.5px var(--sans);white-space:nowrap;background:var(--tabc)}
+.folder[data-type="nq"]{--tabc:var(--t-nq)} .folder[data-type="qd"]{--tabc:var(--t-qd)}
+.folder[data-type="luat"]{--tabc:var(--t-luat)} .folder[data-type="nd"]{--tabc:var(--t-nd)}
+.folder[data-type="tt"]{--tabc:var(--t-tt)}
+.folder[data-type="ct"]{--tabc:var(--t-ct)}
+.folder[data-type="kh"]{--tabc:var(--t-kh)}
+.folder{border-left:4px solid var(--tabc)}
+.f-body{padding:16px 16px 14px}
+.f-title{font-family:var(--serif);font-weight:700;font-size:18.5px;line-height:1.35;margin:0 0 6px}
+.f-meta{font-size:13.5px;color:var(--muted);margin:0}
+.f-status{font-size:13.5px;margin:8px 0 0;padding:6px 10px;border-radius:6px;background:var(--green-soft);color:var(--ink)}
+details{margin-top:12px;border-top:1px solid var(--rule)}
+summary{cursor:pointer;padding:12px 0 4px;font-weight:600;font-size:14.5px;color:var(--green);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ ";}
+details[open] summary::before{content:"– ";}
+.points h4{font-size:14px;margin:14px 0 6px;color:var(--ink)}
+.points ul{margin:0;padding-left:20px}
+.points li{margin:0 0 6px;font-size:15px}
+.f-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{border:1px solid var(--green);background:transparent;color:var(--green);font:600 14px var(--sans);padding:8px 14px;border-radius:8px;cursor:pointer}
+a.btn{text-decoration:none;display:inline-block}
+.btn.solid{background:var(--green);color:var(--surface)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.empty{padding:30px 0;color:var(--muted)}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin:0 0 30px}
+
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <h1>Tủ tài liệu số</h1>
+  <p class="lede">Tra cứu nhanh các văn bản về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số, Đề án 06 và lý lịch tư pháp.</p>
+</header>
+
+<main>
+  <section id="lib" class="wrap">
+    <div class="tools">
+      <input id="q" class="search" type="search" placeholder="Tìm theo số hiệu, tên, nội dung…" aria-label="Tìm văn bản">
+      <div class="chips" id="topics" role="group" aria-label="Lọc theo chủ đề"></div>
+      <div class="chips chips-type" id="chips" role="group" aria-label="Lọc theo loại"></div>
+      <p class="count" id="count"></p>
+    </div>
+    <ul class="docs" id="docs"></ul>
+    <p class="note">Nội dung là bản tóm lược phục vụ quán triệt, học tập. Khi trích dẫn trong văn bản chính thức, đối chiếu với văn bản gốc.</p>
+  </section>
+</main>
+
+<script>
+const TOPICS = {t57:"Nghị quyết 57 & chuyển đổi số", t06:"Đề án 06 & định danh", tdl:"Dữ liệu, an ninh mạng, AI", tll:"Lý lịch tư pháp"};
+const TYPES = {nq:"Nghị quyết", qd:"Quyết định", ct:"Chỉ thị", luat:"Luật", nd:"Nghị định", tt:"Thông tư", kh:"Kế hoạch, văn bản khác"};
+
+const DOCS = [
+{
+  id:"nq57", url:"https://tulieuvankien.dangcongsan.vn/he-thong-van-ban/van-ban-cua-dang/nghi-quyet-so-57-nqtw-ngay-22122024-cua-bo-chinh-tri-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-11162", topic:"t57", type:"nq", code:"57-NQ/TW",
+  title:"Nghị quyết về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia",
+  issuer:"Bộ Chính trị (Tổng Bí thư Tô Lâm ký)", date:"22/12/2024",
+  sections:[
+    {h:"Quan điểm", items:[
+      "KHCN, ĐMST và CĐS là đột phá quan trọng hàng đầu, là động lực chính để phát triển lực lượng sản xuất hiện đại, đổi mới phương thức quản trị quốc gia.",
+      "Người dân và doanh nghiệp là trung tâm, là chủ thể; nhà khoa học là nhân tố then chốt; Nhà nước giữ vai trò dẫn dắt.",
+      "Thể chế là điều kiện tiên quyết, phải đi trước một bước, bỏ tư duy \"không quản được thì cấm\"; dữ liệu là tư liệu sản xuất chính.",
+      "Bảo đảm an ninh mạng, an ninh dữ liệu, an toàn thông tin là yêu cầu xuyên suốt, không tách rời; bảo đảm chủ quyền quốc gia trên không gian mạng.",
+      "Chấp nhận rủi ro, đầu tư mạo hiểm và độ trễ trong nghiên cứu khoa học."
+    ]},
+    {h:"Mục tiêu đến 2030, tầm nhìn 2045", items:[
+      "Đến 2030: thuộc nhóm 3 nước dẫn đầu Đông Nam Á, nhóm 50 nước đứng đầu thế giới về năng lực cạnh tranh số và chỉ số Chính phủ điện tử; kinh tế số tối thiểu 30% GDP.",
+      "Tỷ lệ người dân, doanh nghiệp sử dụng dịch vụ công trực tuyến trên 80%; chi cho R&D đạt 2% GDP; bố trí ít nhất 3% tổng chi ngân sách hằng năm cho KHCN, ĐMST, CĐS.",
+      "Hoàn thành xây dựng, kết nối, chia sẻ đồng bộ các cơ sở dữ liệu quốc gia, cơ sở dữ liệu các ngành; quản lý nhà nước từ Trung ương đến địa phương trên môi trường số.",
+      "Đến 2045: kinh tế số tối thiểu 50% GDP; thuộc nhóm 30 nước dẫn đầu thế giới về ĐMST, CĐS."
+    ]},
+    {h:"Nhiệm vụ, giải pháp chủ yếu", items:[
+      "Bảy nhóm nhiệm vụ: đổi mới tư duy; hoàn thiện thể chế; hạ tầng; nhân lực; CĐS trong hệ thống chính trị; KHCN, ĐMST, CĐS trong doanh nghiệp; hợp tác quốc tế.",
+      "Sớm hoàn thành, phát huy Trung tâm dữ liệu quốc gia; dữ liệu của các bộ, ngành phải liên thông, chia sẻ; hình thành sàn giao dịch dữ liệu.",
+      "Đổi mới toàn diện giải quyết thủ tục hành chính, cung cấp dịch vụ công không phụ thuộc địa giới hành chính, hướng tới dịch vụ công trực tuyến toàn trình dựa trên dữ liệu.",
+      "Thành lập Ban Chỉ đạo Trung ương do Tổng Bí thư làm Trưởng Ban; từ tháng 4/2026, Bộ Công an là Cơ quan Thường trực Ban Chỉ đạo Trung ương."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Là căn cứ gốc để đẩy mạnh số hóa, kết nối, chia sẻ dữ liệu hồ sơ nghiệp vụ, dữ liệu lý lịch tư pháp, bảo đảm an ninh, an toàn dữ liệu.",
+      "Chỉ tiêu dịch vụ công trực tuyến toàn trình gắn trực tiếp với thủ tục cấp Phiếu lý lịch tư pháp trực tuyến."
+    ]}
+  ]
+},
+{
+  id:"nq03", status:"Chương trình kèm NQ 03 đã được thay thế bằng Chương trình kèm NQ 71/NQ-CP (01/4/2025), tiếp tục cập nhật bởi NQ 11/NQ-CP (14/01/2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=212350", topic:"t57", type:"nq", code:"03/NQ-CP",
+  title:"Chương trình hành động của Chính phủ thực hiện Nghị quyết số 57-NQ/TW",
+  issuer:"Chính phủ (Phó Thủ tướng Nguyễn Hòa Bình ký)", date:"09/01/2025 · đã được thay thế bởi Chương trình kèm NQ 71/NQ-CP",
+  sections:[
+    {h:"Mục tiêu", items:[
+      "Thể chế hóa đầy đủ Nghị quyết 57-NQ/TW; xác định nhiệm vụ cụ thể để các bộ, ngành, địa phương xây dựng kế hoạch, làm căn cứ kiểm tra, giám sát, đánh giá.",
+      "Phụ lục I gồm 41 chỉ tiêu đến 2030 và 2045, như: 90% dịch vụ công trực tuyến toàn trình; 100% hồ sơ, kết quả giải quyết thủ tục hành chính được số hóa; 80% dữ liệu số hóa được tái sử dụng."
+    ]},
+    {h:"Nhiệm vụ, giải pháp chủ yếu", items:[
+      "7 nhóm nhiệm vụ bám sát Nghị quyết 57, cụ thể hóa thành 140 nhiệm vụ (Phụ lục II), mỗi nhiệm vụ có cơ quan chủ trì và thời hạn.",
+      "Trọng tâm: hoàn thành Trung tâm dữ liệu quốc gia; hoàn thiện cơ sở dữ liệu quốc gia, chuyên ngành; dịch vụ công không phụ thuộc địa giới hành chính; mỗi người dân có danh tính số, tài khoản số."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Theo dõi các chỉ tiêu về cơ sở dữ liệu quốc gia, sàn dữ liệu, Trung tâm dữ liệu quốc gia; chủ trì hoàn thành Trung tâm dữ liệu quốc gia.",
+      "Chủ trì Nghị định hướng dẫn Luật Dữ liệu; tham mưu thành lập Ủy ban dữ liệu quốc gia; đề án đấu tranh với tấn công mạng, tội phạm mạng."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Chủ trương dùng giấy tờ điện tử trên tài khoản định danh thay giấy tờ giấy, cắt giảm thành phần hồ sơ đã số hóa, áp dụng được cho hồ sơ đề nghị cấp Phiếu lý lịch tư pháp."
+    ]}
+  ]
+},
+{
+  id:"nq71", status:"Còn hiệu lực; đã sửa đổi, bổ sung, cập nhật bởi NQ 11/NQ-CP ngày 14/01/2026. Chỉ thị 29/CT-TTg ngày 16/7/2026 yêu cầu đẩy nhanh tiến độ năm 2026.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=213308", topic:"t57", type:"nq", code:"71/NQ-CP",
+  title:"Nghị quyết sửa đổi, bổ sung, cập nhật Chương trình hành động của Chính phủ thực hiện Nghị quyết 57-NQ/TW",
+  issuer:"Chính phủ (Thủ tướng Phạm Minh Chính ký)", date:"01/4/2025 · hiệu lực từ ngày ký",
+  sections:[
+    {h:"Điểm mới", items:[
+      "Ban hành Chương trình hành động mới thay thế toàn bộ Chương trình kèm NQ 03/NQ-CP; việc đã làm theo NQ 03 tiếp tục thực hiện, cập nhật.",
+      "Phụ lục II tăng lên 189 nhiệm vụ, nhiều thời hạn được đẩy sớm hơn (ví dụ Trung tâm dữ liệu quốc gia đưa vào vận hành trong 6/2025).",
+      "Báo cáo chuyển sang hằng quý, gửi Bộ KH&CN trước ngày 15 tháng cuối quý; đưa Cổng Dịch vụ công quốc gia thành \"một cửa số\" duy nhất."
+    ]},
+    {h:"Nhiệm vụ trọng tâm", items:[
+      "Giữ 7 nhóm nhiệm vụ và 41 chỉ tiêu.",
+      "117 cơ sở dữ liệu quốc gia, chuyên ngành phải hoàn thành, đưa vào khai thác, trong đó có Cơ sở dữ liệu lý lịch tư pháp.",
+      "Hoàn thành số hóa hồ sơ, kết quả giải quyết thủ tục hành chính, tái sử dụng 100% dữ liệu đã số hóa; kết nối hệ thống giải quyết thủ tục hành chính cấp tỉnh với Cơ sở dữ liệu quốc gia về dân cư."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Theo dõi các chỉ tiêu 27, 28, 29, 33, 34, 41 (chỉ tiêu an toàn thông tin mạng chuyển sang Bộ Công an); chủ trì hoàn thành các CSDL dân cư, căn cước, cư trú, định danh điện tử, phạm nhân.",
+      "Đồng bộ dữ liệu về Trung tâm dữ liệu quốc gia; phát triển tiện ích trên VNeID; các Nghị định về Luật Dữ liệu, Quỹ phát triển dữ liệu quốc gia; các đề án về an ninh mạng."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Yêu cầu tái sử dụng 100% dữ liệu đã số hóa là căn cứ trực tiếp để số hóa hồ sơ, dữ liệu lý lịch tư pháp.",
+      "Cơ sở dữ liệu nghiệp vụ ngành Công an phải được đồng bộ về Trung tâm dữ liệu quốc gia; Phòng cần chuẩn hóa dữ liệu sẵn sàng kết nối.",
+      "NQ 71 tiếp tục được sửa đổi bởi Nghị quyết 11/NQ-CP ngày 14/01/2026."
+    ]}
+  ]
+},
+{
+  id:"nq11", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=216653", topic:"t57", type:"nq", code:"11/NQ-CP",
+  title:"Nghị quyết sửa đổi, bổ sung, cập nhật Nghị quyết 71/NQ-CP về Chương trình hành động của Chính phủ thực hiện Nghị quyết 57-NQ/TW",
+  issuer:"Chính phủ", date:"14/01/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Sửa đổi, cập nhật danh mục chỉ tiêu tại Phụ lục I của Chương trình hành động (bỏ chỉ tiêu \"tỷ lệ cơ quan nhà nước chỉ đạo, điều hành, quản trị nội bộ trên môi trường điện tử\").",
+      "Sửa đổi, bổ sung, cập nhật danh mục nhiệm vụ tại Phụ lục II."
+    ]}
+  ]
+},
+{
+  id:"ct29", url:"https://baochinhphu.vn/chi-thi-cua-thu-tuong-chinh-phu-ve-day-nhanh-tien-do-trien-khai-thuc-hien-nhiem-vu-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-nam-2026-102260716173856971.htm", topic:"t57", type:"ct", code:"29/CT-TTg",
+  title:"Chỉ thị về đẩy nhanh tiến độ triển khai thực hiện nhiệm vụ khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số năm 2026",
+  issuer:"Thủ tướng Chính phủ", date:"16/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Chỉ ra nhiều nhiệm vụ đang chậm tiến độ, tỷ lệ giải ngân vốn cho chuyển đổi số còn thấp.",
+      "Rà soát, phân loại nhiệm vụ thành 3 nhóm: triển khai được ngay; cần tháo gỡ vướng mắc; không còn phù hợp.",
+      "Tập trung nguồn lực cho công nghệ chiến lược, cơ sở dữ liệu quốc gia, nền tảng dùng chung; người đứng đầu chịu trách nhiệm về tiến độ."
+    ]}
+  ]
+},
+{
+  id:"kh01", status:"Lưu ý: Ban Chỉ đạo Trung ương có nhiều kế hoạch cùng số 01-KH/BCĐTW năm 2025; kế hoạch hành động chiến lược thực hiện NQ 57 là KH 01-KH/BCĐTW ngày 02/6/2025.", url:"https://tulieuvankien.dangcongsan.vn/he-thong-van-ban/van-ban-cua-dang/ke-hoach-so-01-khbcdtw-ngay-2142025-cua-ban-chi-dao-trung-uong-ve-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-11560", topic:"t57", type:"kh", code:"01-KH/BCĐTW",
+  title:"Kế hoạch triển khai phong trào \"Bình dân học vụ số\"",
+  issuer:"Ban Chỉ đạo Trung ương về phát triển KHCN, ĐMST và CĐS", date:"21/3/2025",
+  sections:[
+    {h:"Mục đích, đối tượng", items:[
+      "Phổ cập tri thức cơ bản về chuyển đổi số, kỹ năng số cho toàn dân, không để ai bị bỏ lại phía sau; bảo đảm an ninh dữ liệu, an toàn thông tin.",
+      "4 nhóm đối tượng: cán bộ, công chức, viên chức; học sinh, sinh viên; người lao động trong doanh nghiệp, hợp tác xã; người dân (chú trọng nhóm yếu thế)."
+    ]},
+    {h:"Chỉ tiêu", items:[
+      "80% cán bộ, công chức, viên chức hiểu biết về CĐS, sử dụng được nền tảng số năm 2025; 100% năm 2026.",
+      "Số người trưởng thành được xác nhận đạt phổ cập kỹ năng số trên VNeID: 40 triệu (2025), 60 triệu (2026)."
+    ]},
+    {h:"Nhiệm vụ, giải pháp", items:[
+      "Xây dựng khung kỹ năng số, chương trình, học liệu; vận hành nền tảng \"Bình dân học vụ số\", tích hợp VNeID để định danh người học, tự động xác nhận kết quả.",
+      "Nhân rộng mô hình Đại sứ số, Gia đình số, Tổ công nghệ số cộng đồng; mỗi xã, phường có ít nhất 1 người hỗ trợ người dân làm thủ tục trên Cổng dịch vụ công.",
+      "Mô hình \"Mỗi công dân – Một danh tính số\": 100% công dân từ 16 tuổi có danh tính số, được hỗ trợ cài đặt VNeID."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Chủ trì nền tảng học trực tuyến, tích hợp VNeID, mô hình danh tính số; bảo đảm an ninh mạng cho phong trào; xây dựng kế hoạch hưởng ứng trong toàn ngành Công an."
+    ]},
+    {h:"Văn bản liên quan", items:[
+      "Kế hoạch số 139-KH/BTGDVTW ngày 16/7/2026 của Ban Tuyên giáo và Dân vận Trung ương về đẩy mạnh thông tin, tuyên truyền phong trào.",
+      "Cán bộ Phòng thuộc nhóm phải đạt chỉ tiêu kỹ năng số; có thể lồng ghép hướng dẫn người dân nộp hồ sơ cấp Phiếu lý lịch tư pháp trực tuyến qua VNeID."
+    ]}
+  ]
+},
+{
+  id:"tb134", url:"https://tulieuvankien.dangcongsan.vn/van-ban-cua-dang/thong-bao-ket-luan-cua-dong-chi-tong-bi-thu-chu-tich-nuoc-to-lam-tai-phien-hop-cua-ban-chi-dao-trung-uong-thuc-hien-nghi.html", topic:"t57", type:"kh", label:"Thông báo", code:"134-TB/VPTW",
+  title:"Thông báo Kết luận của Tổng Bí thư, Chủ tịch nước Tô Lâm tại Phiên họp Ban Chỉ đạo Trung ương thực hiện Nghị quyết số 57-NQ/TW",
+  issuer:"Văn phòng Trung ương Đảng", date:"02/8/2026 · phiên họp ngày 30/7/2026",
+  sections:[
+    {h:"Bối cảnh", items:[
+      "Phiên họp công bố quyết định kiện toàn Ban Chỉ đạo Trung ương; Bộ Công an (Cơ quan Thường trực Ban Chỉ đạo của Chính phủ) báo cáo kết quả triển khai Nghị quyết 57.",
+      "Yêu cầu kiện toàn Ban Chỉ đạo các cấp tinh gọn, rõ đầu mối, rõ trách nhiệm; chuyển trọng tâm từ xác định chủ trương sang tổ chức thực hiện."
+    ]},
+    {h:"Bốn định hướng lớn", items:[
+      "Chuyển từ quản lý tiến độ sang quản trị kết quả: mỗi nhiệm vụ có sản phẩm cuối cùng, người chịu trách nhiệm, tiêu chí đo lường, kiểm chứng được.",
+      "Chuyển từ lao động giản đơn sang lao động sáng tạo, dựa trên KHCN, ĐMST và nhân lực chất lượng cao.",
+      "Tập trung nguồn lực hình thành sản phẩm, thị trường và doanh nghiệp; mọi nhiệm vụ hướng tới ứng dụng, thương mại hóa.",
+      "Mở rộng đổi mới sáng tạo ra toàn xã hội; mỗi cán bộ, doanh nghiệp, người dân đều là chủ thể."
+    ]},
+    {h:"Nhiệm vụ trọng tâm (Phụ lục)", items:[
+      "Chuyển đổi số chuyển từ hệ thống riêng lẻ sang vận hành theo kiến trúc, dữ liệu dùng chung; ưu tiên cấp xã; tái cấu trúc quy trình từ gốc; bảo đảm an ninh mạng.",
+      "Đo kết quả bằng thời gian, chi phí, thành phần hồ sơ được cắt giảm, tỷ lệ tái sử dụng dữ liệu, mức độ hài lòng của người dân.",
+      "Cập nhật đầy đủ, thường xuyên dữ liệu thực hiện Nghị quyết 57 lên hệ thống theodoinq.dcs.vn; kết quả được xét trong đánh giá cán bộ hằng quý.",
+      "Người đứng đầu các cấp trực tiếp lãnh đạo, chỉ đạo, kiểm tra và chịu trách nhiệm về kết quả thực hiện."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Số hóa hồ sơ, dịch vụ công của Phòng được đánh giá bằng chỉ số đo được: thành phần hồ sơ cắt giảm, tỷ lệ tái sử dụng dữ liệu, mức độ hài lòng khi cấp Phiếu lý lịch tư pháp."
+    ]}
+  ]
+},
+{
+  id:"luatkhcn", status:"Còn hiệu lực; văn bản hợp nhất 05/VBHN-VPQH ngày 05/02/2026; nghị định hướng dẫn ngày 14/10/2025 (262, 263, 264, 265, 267, 268/2025/NĐ-CP).", url:"https://vanban.chinhphu.vn/?docid=216914&pageid=27160", topic:"t57", type:"luat", code:"93/2025/QH15",
+  title:"Luật Khoa học, công nghệ và đổi mới sáng tạo",
+  issuer:"Quốc hội", date:"27/6/2025 · hiệu lực 01/10/2025 (một số điều từ 01/7/2025) · 7 chương, 73 điều",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Điều chỉnh hoạt động KHCN, ĐMST của cơ quan, tổ chức, cá nhân và chính sách, biện pháp phát triển lĩnh vực này; thay thế Luật Khoa học và công nghệ năm 2013.",
+      "Lấy ngày 18/5 hằng năm là Ngày Khoa học, Công nghệ và Đổi mới sáng tạo Việt Nam.",
+      "Sửa đổi một số luật liên quan (Công nghệ cao, Chuyển giao công nghệ, Thuế TNCN, Sở hữu trí tuệ...) và bãi bỏ các điều 3 đến 9 của Nghị quyết 193/2025/QH15."
+    ]},
+    {h:"Nguyên tắc", items:[
+      "Nghiên cứu về y tế, công nghệ sinh học, trí tuệ nhân tạo và lĩnh vực liên quan trực tiếp đến con người phải luôn chịu sự giám sát, kiểm soát của con người.",
+      "Nhà nước quản lý chủ yếu bằng hậu kiểm, đánh giá kết quả, không can thiệp vào phương pháp, quy trình thực hiện.",
+      "Chấp nhận rủi ro trong nghiên cứu, thử nghiệm có kiểm soát: làm đúng quy trình, dùng kinh phí đúng mục tiêu thì được loại trừ trách nhiệm hành chính, miễn trách nhiệm dân sự, không phải hoàn trả kinh phí."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Thử nghiệm có kiểm soát công nghệ, sản phẩm, mô hình mới mà pháp luật chưa quy định, trong giới hạn về phạm vi, thời gian, bảo đảm quốc phòng, an ninh, trật tự.",
+      "Nhiệm vụ KHCN dùng ngân sách được giao trực tiếp trong một số trường hợp, như cần giữ bí mật nhà nước hoặc cấp bách vì chủ quyền, an ninh quốc gia.",
+      "Tác giả được thưởng tối thiểu 30% lợi nhuận từ thương mại hóa kết quả nhiệm vụ dùng ngân sách; có chính sách thu hút, đãi ngộ nhân tài."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Cản trở hoạt động KHCN; lợi dụng chức vụ can thiệp trái pháp luật vào đặt hàng, tài trợ, đánh giá; chiếm đoạt kết quả nghiên cứu.",
+      "Tiết lộ, sử dụng trái phép dữ liệu nhạy cảm thu thập khi nghiên cứu; ngụy tạo dữ liệu, đạo văn là vi phạm nghiêm trọng liêm chính khoa học."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Luật thúc đẩy số hóa dữ liệu, dịch vụ công trực tuyến, tự động hóa quy trình nghiệp vụ, ứng dụng dữ liệu lớn, AI: căn cứ để đề xuất nhiệm vụ, sáng kiến số hóa hồ sơ, tàng thư, cơ sở dữ liệu lý lịch tư pháp.",
+      "Nhiệm vụ nghiên cứu cấp cơ sở, sáng kiến, cải tiến kỹ thuật được Nhà nước hỗ trợ; nội dung thuộc bí mật nhà nước không phải phổ biến công khai."
+    ]}
+  ]
+},
+{
+  id:"luatcds", status:"Còn hiệu lực; hướng dẫn bởi NĐ 224/2026/NĐ-CP ngày 24/6/2026.", url:"https://congbao.chinhphu.vn/van-ban/luat-so-148-2025-qh15-468708.htm", topic:"t57", type:"luat", code:"148/2025/QH15",
+  title:"Luật Chuyển đổi số",
+  issuer:"Quốc hội", date:"11/12/2025 · hiệu lực 01/7/2026 · 8 chương, 48 điều · thay thế Luật Công nghệ thông tin 2006",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Quy định nguyên tắc, chính sách chuyển đổi số; điều phối quốc gia; biện pháp bảo đảm; Chính phủ số; kinh tế số, xã hội số; trách nhiệm của cơ quan, tổ chức, cá nhân.",
+      "Các lĩnh vực dữ liệu, giao dịch điện tử, an ninh mạng, viễn thông, trí tuệ nhân tạo thực hiện theo luật chuyên ngành nhưng phải thống nhất với nguyên tắc của Luật này.",
+      "Nghị định 224/2026/NĐ-CP quy định chi tiết, có hiệu lực từ 01/7/2026."
+    ]},
+    {h:"Nguyên tắc", items:[
+      "Lấy người sử dụng làm trung tâm; tăng kết nối, chia sẻ, tái sử dụng dữ liệu, trong đó \"khai báo một lần\" là mặc định.",
+      "Hệ thống số phải bảo đảm an ninh mạng, bảo vệ dữ liệu ngay từ khâu thiết kế; lấy dữ liệu làm trung tâm; dùng chuẩn mở, API để liên thông."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Cản trở, phá hoại chuyển đổi số; truy cập, can thiệp trái phép, làm sai lệch, vô hiệu hóa hệ thống số, dữ liệu số.",
+      "Thu thập, sử dụng, chia sẻ, mua bán dữ liệu số trái pháp luật; lợi dụng chuyển đổi số để lừa đảo, trục lợi, cát cứ dữ liệu."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Bộ KH&CN là cơ quan đầu mối quản lý nhà nước về chuyển đổi số; Bộ Công an, Bộ Quốc phòng quản lý nhà nước về dữ liệu theo pháp luật chuyên ngành; người đứng đầu trực tiếp chịu trách nhiệm về kết quả chuyển đổi số.",
+      "Chi cho chuyển đổi số hằng năm tối thiểu 1% tổng chi ngân sách (trong mức tối thiểu 3% dành cho KHCN, ĐMST, CĐS); cán bộ làm công tác chuyển đổi số, an ninh mạng có chế độ đãi ngộ đặc thù.",
+      "Hạ tầng số công cộng do Nhà nước thống nhất quản lý, gồm định danh, xác thực điện tử, hạ tầng thanh toán số, nền tảng chia sẻ, điều phối dữ liệu quốc gia."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Dịch vụ công trực tuyến cung cấp thống nhất trên Cổng Dịch vụ công quốc gia và VNeID, mặc định toàn trình; công chức yêu cầu nộp thêm giấy tờ khi hệ thống đã khai thác được dữ liệu thì bị xử lý: áp dụng trực tiếp cho thủ tục cấp Phiếu lý lịch tư pháp.",
+      "Hệ thống giải quyết thủ tục hành chính phải khai thác dữ liệu từ cơ sở dữ liệu quốc gia, chuyên ngành và đo chất lượng dịch vụ theo thời gian thực, công khai kết quả.",
+      "Quy trình nghiệp vụ phải được rà soát, chuẩn hóa, đơn giản hóa trước khi số hóa: định hướng cho số hóa hồ sơ, tàng thư."
+    ]}
+  ]
+},
+{
+  id:"nq193", status:"Còn hiệu lực; các điều 3–9 đã bị bãi bỏ bởi Luật Khoa học, công nghệ và đổi mới sáng tạo 93/2025/QH15.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=212952", topic:"t57", type:"nq", code:"193/2025/QH15",
+  title:"Nghị quyết thí điểm một số cơ chế, chính sách đặc biệt tạo đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia",
+  issuer:"Quốc hội", date:"19/02/2025 · hiệu lực từ ngày thông qua",
+  sections:[
+    {h:"Cơ chế cho khoa học, công nghệ", items:[
+      "Tổ chức KHCN công lập, cơ sở giáo dục đại học công lập được thành lập hoặc góp vốn vào doanh nghiệp để thương mại hóa kết quả nghiên cứu; viên chức được tham gia quản lý doanh nghiệp đó.",
+      "Chấp nhận rủi ro: đã thực hiện đúng quy trình thì được miễn trách nhiệm dân sự, không phải hoàn trả kinh phí khi nghiên cứu không đạt kết quả dự kiến.",
+      "Ưu tiên cấp kinh phí theo cơ chế quỹ, khoán chi đến sản phẩm cuối cùng; tài sản, kết quả nghiên cứu giao cho tổ chức chủ trì; ưu đãi thuế."
+    ]},
+    {h:"Cơ chế cho chuyển đổi số", items:[
+      "Ngân sách trung ương được dùng cho nền tảng số, hệ thống thông tin quy mô quốc gia, vùng dùng chung.",
+      "Giai đoạn 2025–2026 được chỉ định thầu các gói về cơ sở dữ liệu quốc gia, hệ thống giải quyết thủ tục hành chính, Cổng dịch vụ công quốc gia và Đề án 06.",
+      "Hỗ trợ triển khai 5G, thí điểm có kiểm soát vệ tinh quỹ đạo tầm thấp, hỗ trợ nhà máy chip bán dẫn đầu tiên."
+    ]},
+    {h:"Tổ chức thực hiện", items:[
+      "Trường hợp có quy định khác nhau thì áp dụng Nghị quyết này; người tham gia xây dựng, ban hành các cơ chế được xem xét loại trừ, miễn, giảm trách nhiệm.",
+      "Bộ Quốc phòng, Bộ Công an kiểm soát hoạt động thí điểm vệ tinh để bảo đảm quốc phòng, an ninh."
+    ]}
+  ]
+},
+{
+  id:"luatcnts", status:"Còn hiệu lực từ 01/01/2026; Chương IV (Trí tuệ nhân tạo) đã bị bãi bỏ bởi Luật Trí tuệ nhân tạo 134/2025/QH15.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=214609", topic:"t57", type:"luat", code:"71/2025/QH15",
+  title:"Luật Công nghiệp công nghệ số",
+  issuer:"Quốc hội", date:"14/6/2025 · hiệu lực 01/01/2026 · 6 chương, 51 điều",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Quy định về phát triển công nghiệp công nghệ số, công nghiệp bán dẫn, trí tuệ nhân tạo và tài sản số; không điều chỉnh hoạt động chỉ phục vụ quốc phòng, an ninh, cơ yếu.",
+      "Gồm 6 chương: Quy định chung; Phát triển công nghiệp công nghệ số; Công nghiệp bán dẫn; Trí tuệ nhân tạo; Tài sản số; Điều khoản thi hành.",
+      "Chương IV (Trí tuệ nhân tạo) sau đó bị bãi bỏ bởi Luật Trí tuệ nhân tạo 134/2025/QH15."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Bộ KH&CN chịu trách nhiệm trước Chính phủ về quản lý nhà nước đối với công nghiệp công nghệ số; tổ chức tham gia phải tuân thủ pháp luật về an ninh mạng, dữ liệu, dữ liệu cá nhân.",
+      "Công nghiệp bán dẫn có chính sách ưu đãi vượt trội: hỗ trợ dự án thiết kế, sản xuất, đóng gói, kiểm thử chip.",
+      "Lần đầu xác lập tài sản số (tài sản ảo, tài sản mã hóa) là tài sản theo Bộ luật Dân sự; quản lý gắn với phòng, chống rửa tiền, tài trợ khủng bố.",
+      "Nhân lực công nghiệp công nghệ số chất lượng cao được miễn thuế TNCN trong 05 năm trong một số trường hợp."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Lợi dụng hoạt động công nghiệp công nghệ số hoặc hệ thống AI để xâm phạm lợi ích quốc gia, an ninh, trật tự, quyền và lợi ích hợp pháp của tổ chức, cá nhân.",
+      "Dùng sản phẩm, dịch vụ công nghệ số để vi phạm pháp luật; gian dối để hưởng ưu đãi."
+    ]}
+  ]
+},
+{
+  id:"qd598", status:"Ban Chỉ đạo đã được kiện toàn theo QĐ 730/QĐ-TTg ngày 24/4/2026 (Bộ Công an là cơ quan thường trực); Quy chế sửa đổi theo QĐ 36/QĐ-BCĐCP ngày 25/4/2026.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=213112", topic:"t06", type:"qd", code:"598/QĐ-TTg",
+  title:"Quyết định thành lập Ban Chỉ đạo của Chính phủ về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và Đề án 06",
+  issuer:"Thủ tướng Chính phủ", date:"13/3/2025 · hiệu lực từ ngày ký",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Hợp nhất Ban Chỉ đạo cải cách hành chính của Chính phủ, Ủy ban Quốc gia về chuyển đổi số và Tổ công tác triển khai Đề án 06 thành một Ban Chỉ đạo do Thủ tướng làm Trưởng Ban.",
+      "Bộ trưởng Bộ Công an là Phó Trưởng Ban; có 3 Tiểu ban giúp việc, trong đó Tiểu ban Triển khai Đề án 06 do Bộ trưởng Bộ Công an làm Trưởng Tiểu ban.",
+      "Ban Chỉ đạo điều phối Chương trình hành động thực hiện Nghị quyết 57-NQ/TW, triển khai Đề án 06 và cải cách hành chính."
+    ]},
+    {h:"Điểm mới", items:[
+      "Thay thế QĐ 110/QĐ-TTg, QĐ 1619/QĐ-TTg; bãi bỏ quy định về Tổ công tác Đề án 06 tại QĐ 06/QĐ-TTg.",
+      "Các bộ và UBND cấp tỉnh hợp nhất các ban chỉ đạo tương ứng thành một Ban Chỉ đạo do người đứng đầu làm Trưởng Ban; Công an các tỉnh thành lập Ban Chỉ đạo tương ứng.",
+      "Cơ cấu đã thay đổi sau này: theo Thông báo 134-TB/VPTW (2026), Bộ Công an là Cơ quan Thường trực Ban Chỉ đạo của Chính phủ."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Nhiệm vụ của Phòng về dữ liệu và dịch vụ công lý lịch tư pháp được theo dõi qua Ban Chỉ đạo hợp nhất ở cấp tỉnh và Ban Chỉ đạo 57 Công an tỉnh."
+    ]}
+  ]
+},
+{
+  id:"qd730", url:"https://baochinhphu.vn/kien-toan-bcd-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-chuyen-doi-so-va-de-an-06-102260424170407537.htm", topic:"t06", type:"qd", code:"730/QĐ-TTg",
+  title:"Quyết định kiện toàn Ban Chỉ đạo của Chính phủ về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và Đề án 06",
+  issuer:"Thủ tướng Chính phủ", date:"24/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thủ tướng Lê Minh Hưng làm Trưởng Ban; Phó Thủ tướng Thường trực Phạm Gia Túc làm Phó Trưởng Ban Thường trực; Bộ Công an là cơ quan thường trực.",
+      "Kiện toàn 3 tổ công tác: Đề án 06, cải cách thủ tục hành chính và chuyển đổi số gắn với Đề án 06; khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số; cải cách hành chính.",
+      "Cùng ngày có Quyết định 733/QĐ-TTg thành lập tổ giúp việc; ngày 25/4/2026 có Quyết định 36/QĐ-BCĐCP sửa đổi Quy chế hoạt động của Ban Chỉ đạo."
+    ]}
+  ]
+},
+{
+  id:"da06", status:"Giai đoạn 2022–2025 đã kết thúc; tiếp nối bởi Chương trình Đề án 06 giai đoạn 2026–2030 (QĐ 826/QĐ-TTg ngày 11/5/2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=205022", topic:"t06", type:"qd", code:"06/QĐ-TTg",
+  title:"Đề án phát triển ứng dụng dữ liệu về dân cư, định danh và xác thực điện tử phục vụ chuyển đổi số quốc gia giai đoạn 2022–2025, tầm nhìn đến năm 2030 (Đề án 06)",
+  issuer:"Thủ tướng Chính phủ", date:"06/01/2022 · tiếp nối bởi QĐ 826/QĐ-TTg (giai đoạn 2026–2030)",
+  sections:[
+    {h:"Quan điểm", items:[
+      "Dữ liệu dân cư là tài nguyên quan trọng, là dữ liệu gốc; các cơ sở dữ liệu khác liên quan đến công dân phải căn cứ, kết nối, chia sẻ với dữ liệu này.",
+      "Người dân chỉ cung cấp thông tin, giấy tờ một lần cho cơ quan nhà nước; khai thác dữ liệu gắn với an toàn, an ninh thông tin.",
+      "Bộ Công an là cơ quan thường trực, chủ trì triển khai Đề án."
+    ]},
+    {h:"Năm nhóm tiện ích", items:[
+      "Phục vụ giải quyết thủ tục hành chính và cung cấp dịch vụ công trực tuyến.",
+      "Phục vụ phát triển kinh tế, xã hội.",
+      "Phục vụ phát triển công dân số.",
+      "Hoàn thiện hệ sinh thái kết nối, khai thác, bổ sung làm giàu dữ liệu dân cư.",
+      "Phục vụ chỉ đạo, điều hành của lãnh đạo các cấp."
+    ]},
+    {h:"Mục tiêu, nhiệm vụ chính", items:[
+      "100% thủ tục đủ điều kiện được cung cấp dịch vụ công trực tuyến có định danh, xác thực điện tử; 100% kết quả giải quyết thủ tục của cá nhân lưu trữ điện tử gắn với số định danh cá nhân.",
+      "Kết nối Cơ sở dữ liệu quốc gia về dân cư với các cơ sở dữ liệu quốc gia, chuyên ngành; yêu cầu dữ liệu \"đúng, đủ, sạch, sống\".",
+      "Số hóa và tái sử dụng kết quả số hóa hồ sơ thủ tục hành chính tại Bộ phận một cửa các cấp."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Phụ lục I đưa \"Cấp Phiếu lý lịch tư pháp\" vào 25 thủ tục hành chính thiết yếu; Phụ lục II giao kết nối Cơ sở dữ liệu lý lịch tư pháp với Cơ sở dữ liệu quốc gia về dân cư.",
+      "Với lực lượng hồ sơ nghiệp vụ: số hóa hồ sơ, tàng thư; làm sạch, chuẩn hóa dữ liệu; đẩy mạnh cấp Phiếu lý lịch tư pháp qua VNeID (thẩm quyền của Công an tỉnh từ 01/7/2026)."
+    ]}
+  ]
+},
+{
+  id:"qd826", status:"Còn hiệu lực; là văn bản chỉ đạo Đề án 06 hiện hành (giai đoạn 2026–2030).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=218056", topic:"t06", type:"qd", code:"826/QĐ-TTg",
+  title:"Chương trình Đề án phát triển ứng dụng dữ liệu về dân cư, định danh và xác thực điện tử phục vụ chuyển đổi số quốc gia giai đoạn 2026–2030, tầm nhìn đến năm 2035 (Chương trình Đề án 06)",
+  issuer:"Thủ tướng Chính phủ (Phó Thủ tướng Hồ Quốc Dũng ký thay)", date:"11/5/2026 · hiệu lực từ ngày ký",
+  sections:[
+    {h:"Quan điểm", items:[
+      "Kế thừa Đề án 06 giai đoạn 2022–2025; vận hành theo nguyên tắc \"5-3-3-2-1\" với 5 trụ cột: pháp lý, hạ tầng, dữ liệu, nguồn lực, an toàn – an ninh; triển khai ở 3 cấp chính quyền.",
+      "Dữ liệu dân cư, căn cước là tài nguyên gốc; tài khoản định danh và thẻ căn cước là \"chìa khóa\" của chuyển đổi số; khai thác dữ liệu minh bạch, gắn với bảo vệ dữ liệu cá nhân."
+    ]},
+    {h:"Mục tiêu 2026–2030, tầm nhìn 2035", items:[
+      "Hồ sơ dịch vụ công trực tuyến đạt 80% (2026), 90% (2030); mức hài lòng 95%; 100% thủ tục được tiếp nhận phi địa giới hành chính.",
+      "Tỷ lệ người dân có tài khoản định danh điện tử mức 2 từ 80% (2026) đến 100% (2030); hoàn thành 12 cơ sở dữ liệu quốc gia trọng yếu trong năm 2026.",
+      "100% thông tin về đối tượng vi phạm pháp luật tra cứu được qua Cơ sở dữ liệu quốc gia về dân cư (2026).",
+      "Tầm nhìn 2035: mọi giao dịch giữa người dân và chính quyền thực hiện trên môi trường số."
+    ]},
+    {h:"Nhiệm vụ, giải pháp chủ yếu", items:[
+      "10 nhóm nhiệm vụ, trong đó: phát triển VNeID thành nền tảng số quốc gia đa tiện ích; nâng cấp Cơ sở dữ liệu quốc gia về dân cư; kết nối, chia sẻ dữ liệu bắt buộc qua nền tảng NDOP.",
+      "Tích hợp dữ liệu dân cư với cơ sở dữ liệu ADN, căn cước, hồ sơ vụ án phục vụ điều tra, phòng ngừa tội phạm; xây dựng nền tảng số quốc gia về văn thư, lưu trữ.",
+      "Tòa án nhân dân tối cao kết nối cơ sở dữ liệu bản án, quyết định với Cơ sở dữ liệu quốc gia về dân cư."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Là cơ quan thường trực Chương trình; vận hành Cơ sở dữ liệu quốc gia về dân cư, Trung tâm dữ liệu quốc gia, hệ thống định danh; tổng hợp báo cáo (các đơn vị gửi trước ngày 15 hằng tháng).",
+      "Kết quả thực hiện được chấm điểm trên phần mềm dean06.vn."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Việc tích hợp dữ liệu dân cư với hồ sơ vụ án, bản án và mục tiêu tra cứu 100% đối tượng vi phạm gắn trực tiếp với dữ liệu hồ sơ nghiệp vụ, tàng thư, lý lịch tư pháp.",
+      "Dữ liệu lý lịch tư pháp kết nối qua số định danh cá nhân, bảo đảm \"đúng, đủ, sạch, sống\"; đẩy mạnh cấp Phiếu lý lịch tư pháp trực tuyến, trả kết quả trên VNeID."
+    ]}
+  ]
+},
+{
+  id:"ct04", status:"Áp dụng cho giai đoạn 2022–2025; nội dung được tiếp nối bởi QĐ 826/QĐ-TTg (2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=209703", topic:"t06", type:"ct", code:"04/CT-TTg",
+  title:"Chỉ thị về tiếp tục đẩy mạnh triển khai Đề án 06 tại các bộ, ngành, địa phương năm 2024 và những năm tiếp theo",
+  issuer:"Thủ tướng Chính phủ", date:"11/02/2024",
+  sections:[
+    {h:"Bối cảnh", items:[
+      "Sơ kết 2 năm cho thấy còn \"điểm nghẽn\": nhiều địa phương chưa trình nghị quyết miễn, giảm phí dịch vụ công trực tuyến, chưa bố trí kinh phí cho Đề án 06."
+    ]},
+    {h:"Nhiệm vụ chung", items:[
+      "Tái cấu trúc quy trình, hoàn thành cung cấp dịch vụ công thiết yếu; ban hành quy trình điện tử liên thông.",
+      "Đẩy nhanh số hóa hồ sơ, kết quả giải quyết thủ tục hành chính; không yêu cầu người dân nộp lại giấy tờ đã được số hóa.",
+      "Ban hành kế hoạch năm với lộ trình hoàn thành 9 nhóm mục tiêu của Đề án 06; đồng bộ dữ liệu về Trung tâm dữ liệu quốc gia."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Trình đề nghị xây dựng Luật Bảo vệ dữ liệu cá nhân, Luật Dữ liệu; chỉ đạo cung cấp dịch vụ xác thực điện tử.",
+      "Phát triển tiện ích trên VNeID; triển khai Trung tâm dữ liệu quốc gia; xây dựng cơ chế kiểm tra, giám sát việc sử dụng dữ liệu công dân để chống lộ lọt."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Giao kết nối Cơ sở dữ liệu lý lịch tư pháp với Cơ sở dữ liệu quốc gia về dân cư và thí điểm cấp Phiếu lý lịch tư pháp trên VNeID (tại Thừa Thiên Huế) trước khi nhân rộng.",
+      "Chỉ thị có phụ lục 69 nhiệm vụ của bộ, ngành và 12 nhiệm vụ của địa phương."
+    ]}
+  ]
+},
+{
+  id:"luatdl", status:"Còn hiệu lực; hướng dẫn bởi NĐ 165/2025/NĐ-CP ngày 30/6/2025.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=212488", topic:"tdl", type:"luat", code:"60/2024/QH15",
+  title:"Luật Dữ liệu",
+  issuer:"Quốc hội", date:"30/11/2024 · hiệu lực 01/7/2025 · 5 chương, 46 điều",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Quy định về dữ liệu số: xây dựng, phát triển, bảo vệ, quản trị, xử lý, sử dụng dữ liệu; Trung tâm dữ liệu quốc gia; Cơ sở dữ liệu tổng hợp quốc gia; sản phẩm, dịch vụ về dữ liệu.",
+      "Định nghĩa dữ liệu gốc, dữ liệu dùng chung, dùng riêng, dữ liệu mở, dữ liệu quan trọng, dữ liệu cốt lõi; chủ thể, chủ quản, chủ sở hữu dữ liệu.",
+      "Thành lập Quỹ phát triển dữ liệu quốc gia; quy định về chuyển dữ liệu xuyên biên giới."
+    ]},
+    {h:"Nguyên tắc", items:[
+      "Dữ liệu phải chính xác, kế thừa, toàn vẹn, an ninh, an toàn; bảo vệ dữ liệu đi cùng với xây dựng, phát triển dữ liệu.",
+      "Dữ liệu gốc có giá trị sử dụng như bản chính giấy tờ đã số hóa; dữ liệu đã có trong cơ sở dữ liệu được kết nối, chia sẻ thì không thu thập lại."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Lợi dụng xử lý dữ liệu để xâm phạm lợi ích quốc gia, an ninh, trật tự; tấn công, chiếm đoạt, phá hoại cơ sở dữ liệu.",
+      "Giả mạo, cố ý làm sai lệch, làm mất, hư hỏng dữ liệu của cơ quan Đảng, Nhà nước; cố ý cung cấp dữ liệu sai lệch hoặc không cung cấp dữ liệu theo quy định."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Bộ Công an là cơ quan đầu mối quản lý nhà nước về dữ liệu (trừ phạm vi Bộ Quốc phòng); Trung tâm dữ liệu quốc gia do Chính phủ thành lập, giao Bộ Công an xây dựng, quản lý, vận hành.",
+      "Chủ trì ban hành danh mục tiêu chuẩn, quy chuẩn kỹ thuật về dữ liệu; thống nhất việc kết nối Cơ sở dữ liệu tổng hợp quốc gia với các hệ thống khác."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Là chủ quản cơ sở dữ liệu nghiệp vụ, đơn vị phải phân loại dữ liệu theo mức độ (cốt lõi, quan trọng, khác), lưu trữ an toàn, bảo vệ trong toàn bộ quá trình xử lý.",
+      "Dữ liệu số hóa từ bản chính hồ sơ, tàng thư có giá trị như bản chính; cơ quan nhà nước khai thác Cơ sở dữ liệu tổng hợp quốc gia không phải nộp phí."
+    ]}
+  ]
+},
+{
+  id:"luatbvdl", status:"Còn hiệu lực; hướng dẫn bởi NĐ 356/2025/NĐ-CP ngày 31/12/2025 (thay thế NĐ 13/2023/NĐ-CP).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=214590", topic:"tdl", type:"luat", code:"91/2025/QH15",
+  title:"Luật Bảo vệ dữ liệu cá nhân",
+  issuer:"Quốc hội", date:"26/6/2025 · hiệu lực 01/01/2026 · 5 chương, 39 điều",
+  sections:[
+    {h:"Phạm vi", items:[
+      "Quy định về dữ liệu cá nhân, bảo vệ dữ liệu cá nhân và quyền, nghĩa vụ, trách nhiệm của các bên liên quan; áp dụng cả với tổ chức nước ngoài xử lý dữ liệu của công dân Việt Nam.",
+      "Dữ liệu cá nhân gồm dữ liệu cơ bản và dữ liệu nhạy cảm (danh mục do Chính phủ ban hành); dữ liệu đã khử nhận dạng không còn là dữ liệu cá nhân."
+    ]},
+    {h:"Nguyên tắc, quyền của chủ thể", items:[
+      "Chỉ thu thập, xử lý đúng phạm vi, mục đích cụ thể, rõ ràng; dữ liệu phải chính xác, chỉ lưu trữ trong thời gian phù hợp.",
+      "Chủ thể có quyền được biết, đồng ý hoặc rút lại đồng ý, xem, chỉnh sửa, yêu cầu xóa, hạn chế xử lý, khiếu nại, khởi kiện; im lặng không được coi là đồng ý."
+    ]},
+    {h:"Hành vi bị nghiêm cấm, xử lý vi phạm", items:[
+      "Cấm xử lý dữ liệu cá nhân trái pháp luật, mua bán dữ liệu cá nhân, chiếm đoạt, cố ý làm lộ, làm mất dữ liệu cá nhân.",
+      "Phạt tiền tối đa: 10 lần khoản thu từ mua bán dữ liệu; 5% doanh thu năm trước khi vi phạm chuyển dữ liệu xuyên biên giới; 03 tỷ đồng với vi phạm khác (mức cho tổ chức; cá nhân bằng một nửa)."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Các trường hợp xử lý không cần sự đồng ý, trong đó có phục vụ hoạt động của cơ quan nhà nước và phòng, chống tội phạm.",
+      "Phát hiện vi phạm có thể gây tổn hại phải thông báo cơ quan chuyên trách chậm nhất 72 giờ; dữ liệu sinh trắc học phải được bảo mật vật lý, hạn chế truy cập.",
+      "Nền tảng mạng xã hội, dịch vụ trực tuyến không được yêu cầu ảnh, video chứa giấy tờ tùy thân để xác thực tài khoản."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Bộ Công an là cơ quan đầu mối quản lý nhà nước về bảo vệ dữ liệu cá nhân; cơ quan chuyên trách bảo vệ dữ liệu cá nhân thuộc Bộ Công an."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Hồ sơ nghiệp vụ, tàng thư, lý lịch tư pháp chứa nhiều dữ liệu cá nhân nhạy cảm: chỉ khai thác đúng thẩm quyền, đúng mục đích; kiểm soát việc cung cấp, chuyển giao; không chia sẻ trái phép (kể cả qua Zalo, mạng xã hội).",
+      "Cấp Phiếu lý lịch tư pháp, số hóa hồ sơ là hoạt động của cơ quan nhà nước không cần sự đồng ý, nhưng vẫn phải có quy trình, biện pháp bảo vệ, kiểm tra định kỳ và cơ chế tiếp nhận phản ánh."
+    ]}
+  ]
+},
+{
+  id:"luatanm", status:"Còn hiệu lực; hướng dẫn bởi NĐ 333/2026/NĐ-CP ngày 19/8/2026 và NĐ 331/2026/NĐ-CP (bảo vệ an ninh mạng đối với hệ thống thông tin).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=216499", topic:"tdl", type:"luat", code:"116/2025/QH15",
+  title:"Luật An ninh mạng",
+  issuer:"Quốc hội", date:"10/12/2025 · hiệu lực 01/7/2026 · 8 chương, 45 điều",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Quy định về an ninh mạng, bảo vệ an ninh mạng và quyền, nghĩa vụ, trách nhiệm của các bên; áp dụng cả với tổ chức nước ngoài kinh doanh sản phẩm, dịch vụ an ninh mạng tại Việt Nam.",
+      "Hợp nhất, thay thế Luật An toàn thông tin mạng 2015 và Luật An ninh mạng 2018; thay cụm từ \"an toàn thông tin\" bằng \"an ninh mạng\" trong nhiều luật."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Đăng tải thông tin chống Nhà nước, bịa đặt, sai sự thật; tấn công mạng, xâm nhập trái phép hệ thống thông tin, cơ sở dữ liệu.",
+      "Dùng trí tuệ nhân tạo hoặc công nghệ mới để giả mạo video, hình ảnh, giọng nói của người khác trái pháp luật; thu thập, mua bán trái phép dữ liệu cá nhân."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Hệ thống thông tin phân thành 5 cấp độ theo mức độ tổn hại; hệ thống quan trọng về an ninh quốc gia phải được thẩm định, chứng nhận trước khi vận hành.",
+      "Doanh nghiệp viễn thông, Internet phải xác thực thông tin khi người dùng đăng ký tài khoản số; cung cấp thông tin, gỡ bỏ thông tin vi phạm theo yêu cầu của lực lượng chuyên trách trong thời hạn luật định.",
+      "Cơ quan dùng ngân sách phải bố trí tối thiểu 15% kinh phí chương trình, đề án, dự án chuyển đổi số cho bảo vệ an ninh mạng; người quản trị hệ thống cấp độ 3 trở lên phải được tập huấn, cấp chứng nhận.",
+      "Chủ quản hệ thống kết nối giám sát về Trung tâm An ninh mạng quốc gia hoặc của tỉnh, báo cáo sự cố; hệ thống đã xác định cấp độ theo luật cũ có 12 tháng để đáp ứng yêu cầu mới."
+    ]},
+    {h:"Trách nhiệm của Bộ Công an", items:[
+      "Là cơ quan đầu mối giúp Chính phủ quản lý nhà nước về an ninh mạng; thẩm định, chứng nhận, kiểm tra hệ thống thông tin quan trọng về an ninh quốc gia; chủ trì phòng, chống tấn công mạng."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Cơ sở dữ liệu lý lịch tư pháp, tàng thư, hệ thống số hóa hồ sơ là hệ thống thông tin cần xác định cấp độ, triển khai bảo vệ, sao lưu, giám sát tương ứng; bảo vệ bí mật nhà nước trên không gian mạng.",
+      "Cấp Phiếu lý lịch tư pháp trực tuyến là dịch vụ công trên không gian mạng thuộc diện phải bảo vệ; cán bộ phải bảo mật tài khoản số của mình."
+    ]}
+  ]
+},
+{
+  id:"luatai", status:"Còn hiệu lực; hướng dẫn bởi NĐ 142/2026/NĐ-CP ngày 30/4/2026.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=216334", topic:"tdl", type:"luat", code:"134/2025/QH15",
+  title:"Luật Trí tuệ nhân tạo",
+  issuer:"Quốc hội", date:"10/12/2025 · hiệu lực 01/3/2026 · 8 chương, 35 điều",
+  sections:[
+    {h:"Phạm vi, bố cục", items:[
+      "Đạo luật riêng đầu tiên về trí tuệ nhân tạo: nghiên cứu, phát triển, cung cấp, triển khai, sử dụng hệ thống AI và quản lý nhà nước; không điều chỉnh hoạt động AI chỉ phục vụ quốc phòng, an ninh, cơ yếu.",
+      "Bãi bỏ Chương IV và một số khoản của Luật Công nghiệp công nghệ số; hệ thống đã hoạt động từ trước có 12–18 tháng để tuân thủ."
+    ]},
+    {h:"Nguyên tắc", items:[
+      "Lấy con người làm trung tâm, không thay thế thẩm quyền, trách nhiệm của con người; con người phải giữ khả năng kiểm soát, can thiệp vào mọi quyết định của hệ thống.",
+      "Quản lý tương xứng mức độ rủi ro; ưu tiên ứng dụng AI trong quản lý, điều hành, dịch vụ công; lĩnh vực ảnh hưởng đến trật tự, an toàn xã hội quản lý chặt hơn."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Hệ thống AI chia 3 mức rủi ro (cao, trung bình, thấp); hệ thống rủi ro cao phải đánh giá sự phù hợp trước khi sử dụng, lưu nhật ký, bảo đảm con người giám sát.",
+      "Người dùng phải biết mình đang tương tác với AI; nội dung do AI tạo ra phải được đánh dấu; âm thanh, hình ảnh giả lập người thật phải gắn nhãn.",
+      "Sự cố nghiêm trọng phải báo cáo, khắc phục; Bộ KH&CN là cơ quan đầu mối quản lý nhà nước."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Dùng yếu tố giả mạo, mô phỏng người thật, sự kiện thật để lừa dối, thao túng; tạo, phát tán nội dung giả mạo gây nguy hại nghiêm trọng đến an ninh, trật tự.",
+      "Thu thập, xử lý dữ liệu để huấn luyện AI trái pháp luật; vô hiệu hóa cơ chế giám sát của con người; che giấu, tẩy xóa nhãn, cảnh báo bắt buộc."
+    ]},
+    {h:"Lưu ý khi CBCS dùng AI", items:[
+      "AI không thay thế thẩm quyền quyết định; người ra quyết định chịu trách nhiệm về việc dùng kết quả của AI (ví dụ khi tra cứu, xác minh lý lịch tư pháp).",
+      "Không đưa tài liệu mật, dữ liệu hồ sơ, dữ liệu cá nhân của công dân vào công cụ AI công cộng; kiểm tra lại nội dung AI tạo ra trước khi đưa vào văn bản chính thức."
+    ]}
+  ]
+},
+{
+  id:"nd224", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=218633", topic:"t57", type:"nd", code:"224/2026/NĐ-CP",
+  title:"Nghị định quy định chi tiết một số điều và biện pháp thi hành Luật Chuyển đổi số",
+  issuer:"Chính phủ", date:"24/6/2026 · hiệu lực 01/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Chiến lược, chương trình, kế hoạch chuyển đổi số phải thống nhất, liên tục từ Trung ương đến địa phương.",
+      "Quy định việc cung cấp thông tin và dịch vụ công trực tuyến trên môi trường số, triển khai thủ tục hành chính trực tuyến toàn trình.",
+      "Là căn cứ áp dụng đối với dịch vụ cấp Phiếu lý lịch tư pháp trực tuyến và các thủ tục hành chính ngành Công an."
+    ]}
+  ]
+},
+{
+  id:"nd333", url:"https://vanban.chinhphu.vn/?docid=219244&pageid=27160", topic:"tdl", type:"nd", code:"333/2026/NĐ-CP",
+  title:"Nghị định quy định chi tiết một số điều và biện pháp thi hành Luật An ninh mạng",
+  issuer:"Chính phủ", date:"19/8/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Quy định các biện pháp: thẩm định, đánh giá điều kiện, kiểm tra, giám sát an ninh mạng; ứng phó sự cố; yêu cầu xóa thông tin vi phạm, tin giả; thu thập dữ liệu điện tử; tạm dừng hệ thống; thu hồi tên miền.",
+      "Quy định chuẩn kiến thức, kỹ năng và chứng nhận đào tạo về an ninh mạng; quản lý định danh địa chỉ IP.",
+      "Cùng đợt có Nghị định 331/2026/NĐ-CP về bảo vệ an ninh mạng đối với hệ thống thông tin (xác định cấp độ, biện pháp bảo vệ)."
+    ]}
+  ]
+},
+{
+  id:"nd142", url:"https://vanban.chinhphu.vn/?docid=218029&pageid=27160", topic:"tdl", type:"nd", code:"142/2026/NĐ-CP",
+  title:"Nghị định quy định chi tiết một số điều và biện pháp thi hành Luật Trí tuệ nhân tạo",
+  issuer:"Chính phủ", date:"30/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Gồm 8 chương, 46 điều.",
+      "Quy định Cổng thông tin một cửa về AI, cơ sở dữ liệu quốc gia về hệ thống AI; phân loại rủi ro; đánh giá sự phù hợp đối với hệ thống AI rủi ro cao.",
+      "Quy định về minh bạch, trách nhiệm giải trình, xử lý sự cố; thử nghiệm có kiểm soát; hạ tầng, dữ liệu AI; trách nhiệm của bộ, ngành, địa phương."
+    ]}
+  ]
+},
+{
+  id:"luatgddt", status:"Còn hiệu lực; sẽ được sửa đổi bởi Luật 20/2026/QH16 (thông qua 24/8/2026, hiệu lực 01/3/2027, một số điều từ 01/10/2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=208421", topic:"tdl", type:"luat", code:"20/2023/QH15",
+  title:"Luật Giao dịch điện tử",
+  issuer:"Quốc hội", date:"22/6/2023 · hiệu lực 01/7/2024 · 8 chương, 53 điều",
+  sections:[
+    {h:"Phạm vi", items:[
+      "Điều chỉnh việc thực hiện giao dịch bằng phương tiện điện tử (không quy định nội dung, điều kiện của giao dịch); thay thế Luật Giao dịch điện tử 2005.",
+      "Chính sách: các bên tự nguyện lựa chọn giao dịch điện tử; phát triển giao dịch điện tử toàn diện, toàn trình."
+    ]},
+    {h:"Nội dung chính", items:[
+      "Thông điệp dữ liệu không bị phủ nhận giá trị pháp lý chỉ vì ở dạng điện tử; đủ điều kiện thì được coi như văn bản, bản gốc, dùng làm chứng cứ.",
+      "Văn bản giấy chuyển thành thông điệp dữ liệu phải giữ toàn vẹn, có ký hiệu xác nhận đã chuyển đổi; hồ sơ lưu trữ dạng điện tử có giá trị như lưu trữ giấy.",
+      "3 loại chữ ký điện tử: chuyên dùng, chữ ký số công cộng, chữ ký số chuyên dùng công vụ; chữ ký số có giá trị pháp lý tương đương chữ ký trên giấy."
+    ]},
+    {h:"Giao dịch điện tử của cơ quan nhà nước", items:[
+      "Dữ liệu chủ trong cơ sở dữ liệu quốc gia có giá trị sử dụng chính thức, tương đương văn bản giấy; cơ quan nhà nước phải sẵn sàng kết nối, chia sẻ dữ liệu.",
+      "Kết quả giải quyết thủ tục hành chính không thuộc bí mật nhà nước phải có bản điện tử có giá trị như bản giấy; ưu tiên giải quyết toàn trình trên môi trường điện tử."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Thu thập, cung cấp, phát tán trái pháp luật thông điệp dữ liệu; giả mạo, làm sai lệch, xóa, hủy thông điệp dữ liệu; chiếm đoạt tài khoản, chữ ký điện tử."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Căn cứ số hóa hồ sơ, tàng thư: bản số hóa phải có ký hiệu xác nhận chuyển đổi, có chữ ký số của đơn vị khi chuyển đổi giấy tờ do cơ quan có thẩm quyền cấp.",
+      "Là nền tảng để Phiếu lý lịch tư pháp bản điện tử có ký số có giá trị pháp lý như bản giấy và để chia sẻ dữ liệu lý lịch tư pháp với các cơ sở dữ liệu khác."
+    ]}
+  ]
+},
+{
+  id:"luatcc", status:"Còn hiệu lực; đã sửa đổi, bổ sung bởi Luật 118/2025/QH15 ngày 10/12/2025 (sửa 10 luật về an ninh, trật tự, hiệu lực 01/7/2026). NĐ 70/2024 hướng dẫn đã sửa bởi NĐ 58/2026/NĐ-CP.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=209628", topic:"t06", type:"luat", code:"26/2023/QH15",
+  title:"Luật Căn cước",
+  issuer:"Quốc hội", date:"27/11/2023 · hiệu lực 01/7/2024 · 7 chương, 46 điều",
+  sections:[
+    {h:"Phạm vi, nguyên tắc", items:[
+      "Điều chỉnh Cơ sở dữ liệu quốc gia về dân cư, Cơ sở dữ liệu căn cước, thẻ căn cước, căn cước điện tử, giấy chứng nhận căn cước; thay thế Luật Căn cước công dân 2014.",
+      "Dữ liệu quản lý tập trung, thống nhất, kết nối, chia sẻ, lưu trữ lâu dài; bảo đảm quyền con người, an ninh thông tin, bảo vệ dữ liệu cá nhân."
+    ]},
+    {h:"Cơ sở dữ liệu", items:[
+      "Cơ sở dữ liệu quốc gia về dân cư gồm 25 nhóm thông tin định danh, nhân thân, cư trú, quan hệ gia đình; thu thập cả từ tàng thư do Công an nhân dân quản lý.",
+      "Số định danh cá nhân 12 chữ số do Bộ Công an quản lý thống nhất, dùng để khai thác thông tin trên các cơ sở dữ liệu và cổng dịch vụ công.",
+      "Cơ sở dữ liệu căn cước có thêm thông tin sinh trắc học (khuôn mặt, vân tay, mống mắt, ADN, giọng nói)."
+    ]},
+    {h:"Thẻ căn cước và căn cước điện tử", items:[
+      "Đổi tên thẻ Căn cước công dân thành thẻ căn cước; công dân từ đủ 14 tuổi phải làm thẻ, dưới 14 tuổi cấp theo nhu cầu; đổi thẻ khi đủ 14, 25, 40, 60 tuổi.",
+      "Thẻ có thể tích hợp thông tin bảo hiểm y tế, BHXH, giấy phép lái xe, khai sinh, kết hôn; mỗi công dân được cấp 01 căn cước điện tử hiển thị trên VNeID.",
+      "Cấp giấy chứng nhận căn cước cho người gốc Việt Nam chưa xác định được quốc tịch; CMND chỉ còn giá trị đến hết 31/12/2024."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Truy nhập, sửa, xóa, phát tán, mua bán, chiếm đoạt, sử dụng trái phép dữ liệu cá nhân trong Cơ sở dữ liệu quốc gia về dân cư, Cơ sở dữ liệu căn cước, hệ thống định danh."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Số định danh cá nhân và dữ liệu dân cư là căn cứ xác minh nhân thân khi cập nhật cơ sở dữ liệu lý lịch tư pháp và cấp Phiếu lý lịch tư pháp.",
+      "Bộ Công an quy định quản lý tàng thư căn cước; việc khai thác, chia sẻ dữ liệu phải đúng thẩm quyền."
+    ]}
+  ]
+},
+{
+  id:"nd69", status:"Còn hiệu lực; đã sửa đổi, bổ sung bởi NĐ 320/2026/NĐ-CP ngày 13/8/2026 (hiệu lực 28/9/2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=210491", topic:"t06", type:"nd", code:"69/2024/NĐ-CP",
+  title:"Nghị định quy định về định danh và xác thực điện tử",
+  issuer:"Chính phủ", date:"25/6/2024 · hiệu lực 01/7/2024 · thay thế NĐ 59/2022/NĐ-CP",
+  sections:[
+    {h:"Phạm vi", items:[
+      "Quy định về danh tính điện tử; tài khoản định danh điện tử của công dân, người nước ngoài, tổ chức; dịch vụ xác thực điện tử; cấp, khóa, mở khóa căn cước điện tử; ứng dụng VNeID.",
+      "Thủ tục trên Cổng dịch vụ công quốc gia, hệ thống cấp bộ, cấp tỉnh được thực hiện bằng tài khoản định danh điện tử."
+    ]},
+    {h:"Tài khoản định danh điện tử", items:[
+      "Công dân từ đủ 14 tuổi có thẻ căn cước được cấp tài khoản mức 1 và 2; từ 6 đến dưới 14 tuổi cấp khi có nhu cầu; dưới 6 tuổi chỉ cấp mức 1.",
+      "Mức 1 đăng ký trên VNeID; mức 2 làm trực tiếp tại Công an cấp xã hoặc cơ quan quản lý căn cước, không phụ thuộc nơi cư trú.",
+      "Thông tin trên tài khoản mức 2 và căn cước điện tử có giá trị tương đương xuất trình giấy tờ; công dân không phải trả phí."
+    ]},
+    {h:"Xác thực, lưu trữ", items:[
+      "Có 4 mức xác thực, mức 3 và 4 có yếu tố sinh trắc học; dịch vụ xác thực điện tử chỉ do đơn vị, doanh nghiệp thuộc Công an nhân dân cung cấp.",
+      "Thông tin danh tính lưu vĩnh viễn; lịch sử truy cập lưu tối thiểu 05 năm; hệ thống kết nối phải đạt an toàn thông tin tối thiểu cấp độ 3."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Thủ tục cấp Phiếu lý lịch tư pháp trực tuyến dùng tài khoản định danh điện tử để nộp hồ sơ; căn cước điện tử thay giấy tờ tùy thân khi tiếp nhận hồ sơ.",
+      "Nghị định đang được giao sửa đổi, bổ sung theo QĐ 826/QĐ-TTg."
+    ]}
+  ]
+},
+{
+  id:"nd70", status:"Còn hiệu lực; đã sửa đổi, bổ sung bởi NĐ 58/2026/NĐ-CP ngày 13/02/2026 (hiệu lực 15/3/2026).", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=210497", topic:"t06", type:"nd", code:"70/2024/NĐ-CP",
+  title:"Nghị định quy định chi tiết một số điều và biện pháp thi hành Luật Căn cước",
+  issuer:"Chính phủ", date:"25/6/2024 · hiệu lực 01/7/2024 · thay thế NĐ 137/2015/NĐ-CP",
+  sections:[
+    {h:"Phạm vi, điểm mới", items:[
+      "Quy định chi tiết Luật Căn cước; quản lý, vận hành Cơ sở dữ liệu quốc gia về dân cư; xác lập, hủy số định danh cá nhân; xác nhận số chứng minh nhân dân 9 số.",
+      "Số CMND 9 số được mã hóa trong mã QR trên thẻ căn cước; cơ quan không được yêu cầu công dân nộp giấy xác nhận số CMND."
+    ]},
+    {h:"Cơ sở dữ liệu dân cư và căn cước", items:[
+      "Thu thập, cập nhật dữ liệu theo từng cấp Công an; Công an cấp tỉnh chuẩn hóa dữ liệu từ tàng thư và từ việc cấp thẻ; mọi thay đổi phải lưu lịch sử.",
+      "5 phương thức khai thác: kết nối trực tiếp, qua Cổng dịch vụ công, qua VNeID, qua nền tảng định danh, bằng văn bản; tổ chức ngoài nhà nước phải được chủ thể thông tin đồng ý.",
+      "Bộ Công an có quyền từ chối, tạm ngừng kết nối nếu hệ thống không bảo đảm an toàn (tối thiểu cấp độ 3)."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Công an cấp tỉnh chuẩn hóa dữ liệu dân cư từ tàng thư: căn cứ trực tiếp cho công tác tàng thư, hồ sơ của Phòng.",
+      "Phụ lục liệt kê dữ liệu lý lịch tư pháp là nguồn chia sẻ vào Cơ sở dữ liệu quốc gia về dân cư: thông tin Phiếu số 1, tình trạng án tích, thông tin cấm đảm nhiệm chức vụ."
+    ]}
+  ]
+},
+{
+  id:"nd320", url:"https://vanban.chinhphu.vn/?docid=219189&pageid=27160", topic:"t06", type:"nd", code:"320/2026/NĐ-CP",
+  title:"Nghị định sửa đổi, bổ sung một số điều của Nghị định 69/2024/NĐ-CP quy định về định danh và xác thực điện tử",
+  issuer:"Chính phủ", date:"13/8/2026 · hiệu lực 28/9/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Bổ sung tài khoản hưởng an sinh xã hội trên VNeID; cho phép tích hợp tài khoản thanh toán, ví điện tử, Mobile Money để nhận trợ cấp, lương hưu, chi trả an sinh.",
+      "Không được yêu cầu người dân nộp giấy tờ khi dữ liệu đã được tích hợp trên hệ thống định danh.",
+      "Giấy tờ không thuộc bí mật nhà nước được tự động đồng bộ lên hệ thống định danh khi cơ sở dữ liệu của cơ quan cấp đã kết nối."
+    ]}
+  ]
+},
+{
+  id:"nd58", url:"https://vanban.chinhphu.vn/?docid=216977&pageid=27160", topic:"t06", type:"nd", code:"58/2026/NĐ-CP",
+  title:"Nghị định sửa đổi, bổ sung một số nghị định về điều kiện an ninh, trật tự, con dấu, pháo và quy định chi tiết Luật Cư trú, Luật Căn cước",
+  issuer:"Chính phủ", date:"13/02/2026 · hiệu lực 15/3/2026 (một phần Điều 4 từ 01/7/2026)",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Sửa đổi Nghị định 70/2024/NĐ-CP: cho phép cấp, đổi, cấp lại thẻ căn cước trực tuyến qua VNeID.",
+      "Sửa đổi quy định chi tiết Luật Cư trú theo hướng chuyển đổi số, phân cấp.",
+      "Sửa đổi quy định về điều kiện an ninh, trật tự, quản lý con dấu, pháo."
+    ]}
+  ]
+},
+{
+  id:"luatct", status:"Còn hiệu lực; đã sửa đổi bởi Luật 59/2024/QH15 và Luật 118/2025/QH15; văn bản hợp nhất 06/VBHN-VPQH ngày 05/02/2026 (nút \"Xem toàn văn\" mở bản hợp nhất).", url:"https://vanban.chinhphu.vn/?docid=216915&pageid=27160", topic:"t06", type:"luat", code:"68/2020/QH14",
+  title:"Luật Cư trú",
+  issuer:"Quốc hội", date:"13/11/2020 · hiệu lực 01/7/2021 · 7 chương, 38 điều",
+  sections:[
+    {h:"Phạm vi, nguyên tắc", items:[
+      "Quy định việc thực hiện quyền tự do cư trú, đăng ký, quản lý cư trú; thông tin cư trú được cập nhật vào Cơ sở dữ liệu quốc gia về dân cư và Cơ sở dữ liệu về cư trú.",
+      "Mỗi công dân chỉ có một nơi thường trú, có thể có thêm một nơi tạm trú; quyền tự do cư trú bị hạn chế với người đang bị áp dụng biện pháp ngăn chặn, người bị kết án chưa chấp hành hoặc đang thi hành án..."
+    ]},
+    {h:"Điểm mới", items:[
+      "Quản lý cư trú bằng cơ sở dữ liệu thay cho sổ; sổ hộ khẩu, sổ tạm trú hết giá trị từ 01/01/2023.",
+      "Đăng ký thường trú giải quyết trong 07 ngày làm việc; chỗ ở thuê, mượn, ở nhờ phải bảo đảm diện tích tối thiểu (không thấp hơn 08 m² sàn/người).",
+      "Ở nơi khác từ 30 ngày trở lên phải đăng ký tạm trú (tối đa 02 năm, được gia hạn); đăng ký, thông báo lưu trú, khai báo tạm vắng có thể thực hiện trực tuyến."
+    ]},
+    {h:"Hành vi bị nghiêm cấm", items:[
+      "Cản trở quyền tự do cư trú; nhũng nhiễu, tự đặt thủ tục, giấy tờ trái luật; làm giả, mua bán giấy tờ, dữ liệu cư trú; truy nhập, sửa, xóa, cung cấp trái phép thông tin trong Cơ sở dữ liệu về cư trú."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Luật Cư trú sửa đổi khoản 1 Điều 45 Luật Lý lịch tư pháp về hồ sơ yêu cầu cấp Phiếu; thông tin cư trú nay được khai thác từ cơ sở dữ liệu thay vì yêu cầu người dân nộp giấy tờ.",
+      "Tra cứu thông tin cư trú khi xác minh hồ sơ phải đúng thẩm quyền, bảo mật; Bộ Công an đang tổng kết 05 năm thi hành Luật Cư trú (KH 557/KH-BCĐ)."
+    ]}
+  ]
+},
+{
+  id:"lltp", url:"https://vanban.chinhphu.vn/?docid=216911&pageid=27160", topic:"tll", type:"luat", code:"28/2009/QH12",
+  status:"Còn hiệu lực, đã sửa đổi bởi Luật 68/2020/QH14 và Luật 107/2025/QH15 (hiệu lực 01/7/2026); văn bản hợp nhất 02/VBHN-VPQH ngày 05/02/2026. Nội dung dưới đây là luật hiện hành.",
+  title:"Luật Lý lịch tư pháp (hiện hành, theo văn bản hợp nhất năm 2026)",
+  issuer:"Quốc hội", date:"17/6/2009 · hiệu lực 01/7/2010 · sửa đổi 2020, 2025 · hợp nhất 05/02/2026",
+  sections:[
+    {h:"Phạm vi, mục đích", items:[
+      "Điều chỉnh việc cung cấp, tiếp nhận, cập nhật thông tin lý lịch tư pháp; lập lý lịch tư pháp; xây dựng, quản lý cơ sở dữ liệu lý lịch tư pháp; cấp Phiếu lý lịch tư pháp; quản lý nhà nước về lý lịch tư pháp.",
+      "Mục đích: chứng minh cá nhân có hay không có án tích, có bị cấm đảm nhiệm chức vụ, thành lập, quản lý doanh nghiệp, hợp tác xã; ghi nhận việc xóa án tích, tạo điều kiện tái hòa nhập cộng đồng; hỗ trợ tố tụng, thống kê tư pháp hình sự, quản lý nhân sự, đăng ký kinh doanh."
+    ]},
+    {h:"Cơ quan quản lý, cơ sở dữ liệu (từ 01/7/2026)", items:[
+      "Bộ Công an thay Bộ Tư pháp quản lý cơ sở dữ liệu lý lịch tư pháp và thực hiện dịch vụ công cấp Phiếu; cơ quan cấp Phiếu là Cục Hồ sơ nghiệp vụ (V06) và Công an cấp tỉnh.",
+      "Cơ sở dữ liệu xây dựng tập trung, thống nhất tại Bộ Công an (thay cho mô hình hai cấp trước đây), kết nối Cơ sở dữ liệu quốc gia về dân cư, bảo đảm \"đúng, đủ, sạch, sống, thống nhất, dùng chung\".",
+      "Gồm 3 nhóm thông tin: nhân thân (khóa là số định danh cá nhân hoặc số hộ chiếu); án tích, thi hành án, xóa án tích; cấm đảm nhiệm chức vụ, thành lập, quản lý doanh nghiệp, hợp tác xã.",
+      "Thông tin lý lịch tư pháp và Phiếu được quản lý, bảo vệ như dữ liệu cá nhân nhạy cảm."
+    ]},
+    {h:"Nguồn thông tin, cập nhật, xóa án tích", items:[
+      "Tòa án, Viện kiểm sát, Cơ quan điều tra, cơ quan thi hành án hình sự, dân sự, Bộ Quốc phòng... cung cấp thông tin đầy đủ, chính xác, trong 05 ngày làm việc.",
+      "Người bị kết án đương nhiên được xóa án tích hoặc được Tòa án quyết định xóa án tích thì cơ quan cấp Phiếu cập nhật \"đã được xóa án tích\"; dữ liệu đồng bộ qua NDOP/API chậm nhất 01 ngày làm việc.",
+      "Thông tin đã có trong cơ sở dữ liệu được kết nối thì không yêu cầu người dân cung cấp lại; cơ quan có thẩm quyền khai thác thông tin trực tiếp thay cho việc yêu cầu nộp Phiếu."
+    ]},
+    {h:"Phiếu lý lịch tư pháp số 1 và số 2", items:[
+      "Phiếu số 1 cấp cho công dân Việt Nam, người nước ngoài đã hoặc đang cư trú tại Việt Nam và cơ quan, tổ chức có thẩm quyền (quản lý nhân sự, đăng ký kinh doanh...); chỉ ghi án tích chưa được xóa; thông tin cấm đảm nhiệm chức vụ, thành lập, quản lý doanh nghiệp chỉ ghi khi có yêu cầu.",
+      "Phiếu số 2 cấp cho cơ quan tiến hành tố tụng và cho cá nhân để biết nội dung lý lịch tư pháp của mình; ghi đầy đủ án tích đã xóa và chưa xóa, các lệnh cấm.",
+      "Phiếu có bản điện tử và bản giấy, giá trị như nhau; thông tin lý lịch tư pháp hiển thị trên VNeID có giá trị như Phiếu."
+    ]},
+    {h:"Thủ tục cấp Phiếu hiện hành", items:[
+      "3 cách: trực tuyến qua VNeID, Cổng Dịch vụ công quốc gia (nhận Phiếu điện tử); trực tiếp tại Công an cấp tỉnh, Cục Hồ sơ nghiệp vụ; qua bưu chính (nhận Phiếu giấy).",
+      "Được ủy quyền yêu cầu cấp Phiếu; cha, mẹ, vợ, chồng, con, người giám hộ được làm thay; tờ khai tự động điền thông tin nhân thân; Phiếu xác thực bằng mã QR.",
+      "Thời hạn không quá 05 ngày làm việc; cần xác minh thì tối đa 15 ngày; cơ quan nhà nước, cơ quan tố tụng khai thác thông tin không phải nộp phí."
+    ]},
+    {h:"Hành vi bị nghiêm cấm, giới hạn yêu cầu Phiếu", items:[
+      "Nghiêm cấm: khai thác, sửa chữa, làm sai lệch, hủy hoại dữ liệu trái phép; cung cấp thông tin sai sự thật; giả mạo giấy tờ để yêu cầu cấp Phiếu; làm sai lệch nội dung Phiếu; cấp Phiếu sai nội dung, sai thẩm quyền; sử dụng Phiếu của người khác trái pháp luật, xâm phạm bí mật đời tư.",
+      "Không được yêu cầu người dân nộp Phiếu số 2; Phiếu số 1 chỉ được yêu cầu khi luật, nghị quyết, pháp lệnh, nghị định có quy định."
+    ]},
+    {h:"Văn bản hướng dẫn, triển khai năm 2026", items:[
+      "Nghị định 216/2026/NĐ-CP (chi tiết thi hành) và Thông tư 101/2026/TT-BCA (cơ sở dữ liệu, thủ tục, biểu mẫu): xem mục riêng.",
+      "Từ 26/8/2026, Bộ Công an phát động đợt cao điểm 180 ngày làm sạch dữ liệu lý lịch tư pháp và hiển thị trên VNeID (xem mục riêng)."
+    ]}
+  ]
+},
+{
+  id:"lltp107", status:"Đã hợp nhất vào Luật Lý lịch tư pháp tại văn bản hợp nhất 02/VBHN-VPQH ngày 05/02/2026.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=216571", topic:"tll", type:"luat", code:"107/2025/QH15",
+  title:"Luật sửa đổi, bổ sung một số điều của Luật Lý lịch tư pháp",
+  issuer:"Quốc hội", date:"Thông qua 05/12/2025 · hiệu lực 01/7/2026",
+  sections:[
+    {h:"Chuyển quản lý lý lịch tư pháp sang Bộ Công an", items:[
+      "Cơ quan có thẩm quyền cấp Phiếu: Cục Hồ sơ nghiệp vụ – Bộ Công an (V06) và Công an cấp tỉnh (thay cho Trung tâm Lý lịch tư pháp quốc gia và Sở Tư pháp).",
+      "Cơ sở dữ liệu lý lịch tư pháp xây dựng tập trung, thống nhất tại Bộ Công an, kết nối Cơ sở dữ liệu quốc gia về dân cư, gắn với số định danh cá nhân (hoặc số hộ chiếu).",
+      "Thông tin lý lịch tư pháp và Phiếu được quản lý như dữ liệu cá nhân nhạy cảm; Bộ Tư pháp, Bộ Quốc phòng, VKSND tối cao, TAND tối cao cung cấp nguồn thông tin cho Bộ Công an."
+    ]},
+    {h:"Nguồn thông tin, thời hạn cung cấp", items:[
+      "Tòa án, Viện kiểm sát, Cơ quan điều tra trên địa bàn cung cấp trích lục bản án, quyết định, thông tin về hành vi phạm tội mới cho Công an cấp tỉnh; các cơ quan ở Trung ương, trong Quân đội gửi Cục Hồ sơ nghiệp vụ.",
+      "Thời hạn gửi thông tin rút xuống 05 ngày làm việc; cung cấp bằng bản chính, bản sao hoặc bản điện tử kèm kết nối, chia sẻ dữ liệu.",
+      "Công an cấp tỉnh lập Lý lịch tư pháp, cập nhật thông tin cấm đảm nhiệm chức vụ, thành lập, quản lý doanh nghiệp, hợp tác xã; cập nhật \"đã được xóa án tích\"."
+    ]},
+    {h:"Điểm mới về cấp Phiếu", items:[
+      "Yêu cầu cấp Phiếu chủ yếu trực tuyến qua VNeID hoặc Cổng Dịch vụ công quốc gia; người nước ngoài, người chưa có định danh điện tử nộp trực tiếp hoặc qua bưu chính.",
+      "Phiếu có bản điện tử và bản giấy, giá trị pháp lý như nhau; thông tin sau khi cấp hiển thị trên VNeID và có giá trị như Phiếu.",
+      "Thời hạn cấp Phiếu 05 ngày làm việc (trước đây 10 ngày); cần xác minh thì không quá 15 ngày.",
+      "Cá nhân từ đủ 16 tuổi có quyền yêu cầu cấp Phiếu của mình; được yêu cầu cấp cho cha, mẹ, vợ, chồng, con, người mình giám hộ hoặc ủy quyền."
+    ]},
+    {h:"Bảo vệ quyền của công dân", items:[
+      "Cơ quan, tổ chức không được yêu cầu người dân nộp Phiếu số 2; Phiếu số 1 chỉ được yêu cầu khi luật, nghị quyết, pháp lệnh, nghị định quy định.",
+      "Cơ quan nhà nước, cơ quan tiến hành tố tụng khai thác thông tin qua kết nối dữ liệu, không yêu cầu cá nhân nộp Phiếu; khai thác thông tin và sử dụng thông tin trên VNeID không mất phí."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Phòng Hồ sơ nghiệp vụ Công an cấp tỉnh là đầu mối: tiếp nhận thông tin từ Tòa án, Viện kiểm sát, Cơ quan điều tra trên địa bàn trong 05 ngày làm việc; lập, cập nhật Lý lịch tư pháp; bảo đảm thời hạn cấp Phiếu.",
+      "Hồ sơ tiếp nhận trước 01/7/2026 giải quyết theo luật cũ; các cơ quan phải hoàn thành kết nối dữ liệu lý lịch tư pháp hình thành trước đây với Bộ Công an."
+    ]}
+  ]
+},
+{
+  id:"nd216", status:"Còn hiệu lực.", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=218523", topic:"tll", type:"nd", code:"216/2026/NĐ-CP",
+  title:"Nghị định quy định chi tiết và hướng dẫn thi hành một số điều của Luật Lý lịch tư pháp",
+  issuer:"Chính phủ (Phó Thủ tướng Phạm Gia Túc ký thay)", date:"18/6/2026 · hiệu lực 01/7/2026 · thay thế NĐ 111/2010/NĐ-CP",
+  sections:[
+    {h:"Cơ sở dữ liệu lý lịch tư pháp", items:[
+      "Bộ Công an chủ trì xây dựng, quản lý, vận hành, bảo vệ, lưu trữ; Bộ Tư pháp, Bộ Quốc phòng và cơ quan liên quan chỉ đạo đơn vị trực thuộc cung cấp thông tin.",
+      "Xây dựng tập trung; dữ liệu đã có qua kết nối, chia sẻ thì không thu thập lại; mọi bản ghi được lưu vết truy cập, chỉnh sửa, cập nhật.",
+      "Số định danh cá nhân (hoặc số hộ chiếu nếu không có) là thông tin gốc để đồng bộ với Cơ sở dữ liệu quốc gia về dân cư.",
+      "Kết nối, chia sẻ bắt buộc qua NDOP, API, đồng bộ tự động; đồng bộ trong không quá 01 ngày làm việc kể từ khi thông tin được cập nhật.",
+      "Lưu trữ vĩnh viễn; sao lưu tối thiểu 02 bản: dữ liệu phát sinh 01 lần/ngày, dữ liệu đầy đủ 01 lần/tuần; cán bộ chỉ truy cập trong phạm vi nhiệm vụ được giao."
+    ]},
+    {h:"Thủ tục cấp Phiếu", items:[
+      "03 hình thức: trực tuyến (VNeID, Cổng Dịch vụ công quốc gia), qua bưu chính, trực tiếp tại cơ quan có thẩm quyền nơi cư trú hoặc nơi gần nhất.",
+      "Thời hạn phản hồi hồ sơ: trực tuyến trong 08 giờ làm việc; trực tiếp trong 01 giờ; bưu chính trong 01 ngày làm việc.",
+      "Không yêu cầu nộp giấy tờ chứng minh thông tin đã có trong cơ sở dữ liệu; Phiếu điện tử trả trên VNeID, Cổng Dịch vụ công quốc gia; Phiếu giấy trả trực tiếp hoặc qua bưu chính."
+    ]},
+    {h:"Nhiệm vụ liên quan Công an tỉnh", items:[
+      "Công an tỉnh lập Lý lịch tư pháp đối với người bị cấm đảm nhiệm chức vụ, thành lập, quản lý doanh nghiệp, hợp tác xã (trước đây do Sở Tư pháp thực hiện).",
+      "Cơ quan cấp Phiếu cập nhật thông tin thi hành án, xác định trường hợp đương nhiên được xóa án tích, xác minh qua Cơ sở dữ liệu quốc gia về dân cư.",
+      "Thông tin sai sót được điều chỉnh theo đề nghị của cơ quan cung cấp thông tin hoặc của cá nhân; cơ quan cấp Phiếu kiểm tra, xác minh, điều chỉnh và thông báo kết quả.",
+      "Bộ Tư pháp, Bộ Quốc phòng số hóa, chuyển dữ liệu lý lịch tư pháp hình thành trước 01/7/2026 vào cơ sở dữ liệu do Bộ Công an quản lý: trọng tâm tiếp nhận, chuẩn hóa dữ liệu của Phòng.",
+      "Hồ sơ tiếp nhận hoặc đóng dấu bưu chính trước 01/7/2026 giải quyết theo quy định cũ."
+    ]}
+  ]
+},
+{
+  id:"tt101", status:"Còn hiệu lực.", url:"https://congbao.chinhphu.vn/van-ban/thong-tu-so-101-2026-tt-bca-470081.htm", topic:"tll", type:"tt", code:"101/2026/TT-BCA",
+  title:"Thông tư quy định quản lý, sử dụng, khai thác cơ sở dữ liệu lý lịch tư pháp; trình tự, thủ tục cấp Phiếu lý lịch tư pháp, cung cấp thông tin lý lịch tư pháp và sử dụng biểu mẫu",
+  issuer:"Bộ trưởng Bộ Công an", date:"24/6/2026 · hiệu lực 01/7/2026 · 5 chương, 24 điều, 13 biểu mẫu",
+  sections:[
+    {h:"Phạm vi, nguyên tắc", items:[
+      "Thay thế Thông tư 13/2011/TT-BTP và 06/2013/TT-BTP; căn cứ Luật Lý lịch tư pháp (sửa đổi bởi Luật 107/2025/QH15) và Nghị định 216/2026/NĐ-CP.",
+      "Cơ sở dữ liệu tập trung, thống nhất, lưu trữ lâu dài; nghiêm cấm tự ý chỉnh sửa làm sai lệch thông tin; dữ liệu ký số trước khi chia sẻ và được lưu nhật ký."
+    ]},
+    {h:"Quản lý, cập nhật cơ sở dữ liệu", items:[
+      "Phòng Hồ sơ nghiệp vụ Công an cấp tỉnh tiếp nhận thông tin từ Tòa án, Viện kiểm sát, trại tạm giam, cơ quan thi hành án hình sự, Cơ quan điều tra, Thi hành án dân sự trên địa bàn, xử lý trong 01 ngày làm việc.",
+      "Lý lịch tư pháp lập dưới dạng dữ liệu điện tử, mã số là số định danh cá nhân; thông tin nhân thân, hộ tịch xác thực qua Cơ sở dữ liệu quốc gia về dân cư.",
+      "Tài liệu giấy phải được số hóa, gắn với từng Lý lịch tư pháp, rồi lưu tại tàng thư căn cước can phạm.",
+      "Mọi chỉnh sửa dữ liệu đã cập nhật phải được lãnh đạo Cục hoặc Phòng Hồ sơ nghiệp vụ phê duyệt; hệ thống lưu vết người, thời điểm tác động."
+    ]},
+    {h:"Thủ tục cấp Phiếu", items:[
+      "Trực tuyến: công dân có tài khoản định danh mức 2 nộp qua Cổng Dịch vụ công quốc gia hoặc VNeID; tờ khai tự động điền từ Cơ sở dữ liệu quốc gia về dân cư; phí thanh toán điện tử; cần xác minh thì phần mềm tự kích hoạt quy trình.",
+      "Giám đốc Công an cấp tỉnh (hoặc người được ủy quyền) duyệt, ký Phiếu; Phiếu điện tử ký số, trả về VNeID, Cổng Dịch vụ công quốc gia.",
+      "Trực tiếp hoặc bưu chính: cho người chưa có định danh mức 2, người nước ngoài, người yêu cầu cấp cho cha, mẹ, vợ, chồng, con, người được giám hộ hoặc được ủy quyền; yêu cầu cả Phiếu số 1 và số 2 thì nộp 02 bộ hồ sơ.",
+      "Dự kiến quá hạn thì chậm nhất 01 ngày trước hạn phải gửi Phiếu xin lỗi và hẹn lại; mỗi Phiếu có mã QR để xác thực."
+    ]},
+    {h:"Cung cấp thông tin, VNeID", items:[
+      "Cơ quan, tổ chức nhận thông tin qua Hệ thống thông tin lý lịch tư pháp, đăng nhập bằng tài khoản định danh tổ chức, phải khai báo mục đích.",
+      "Thông tin hiển thị trên VNeID gồm tình trạng án tích, tình trạng bị cấm đảm nhiệm chức vụ, thời gian cập nhật; cá nhân có thể đề nghị chỉnh sửa, cơ quan cấp Phiếu xác minh."
+    ]},
+    {h:"Liên hệ công tác hồ sơ nghiệp vụ", items:[
+      "Việc Phòng làm: xử lý thông tin đầu vào trong 01 ngày làm việc; lập, cập nhật Lý lịch tư pháp điện tử; số hóa tài liệu giấy; trình lãnh đạo duyệt mọi chỉnh sửa; xác minh; tiếp nhận hồ sơ trực tiếp; thống kê, báo cáo định kỳ.",
+      "Hồ sơ tiếp nhận trước 01/7/2026 giải quyết theo quy định cũ."
+    ]}
+  ]
+},
+{
+  id:"cd180", url:"https://cand.vn/cao-diem-180-ngay-lam-sach-du-lieu-ly-lich-tu-phap-va-hien-thi-tren-vneid-post821534.html", topic:"tll", type:"kh", label:"Phong trào", code:"Cao điểm 180 ngày",
+  title:"Đợt thi đua cao điểm 180 ngày làm sạch dữ liệu lý lịch tư pháp và hiển thị thông tin lý lịch tư pháp trên VNeID",
+  issuer:"Bộ Công an", date:"Phát động 26/8/2026 · theo Kế hoạch tổng thể ngày 12/8/2026 (văn bản không công bố công khai)",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Rà soát, xác minh, chuẩn hóa dữ liệu lý lịch tư pháp theo từng nhóm tuổi, nhóm đối tượng; cập nhật dữ liệu phát sinh mới.",
+      "Đồng bộ dữ liệu với Cơ sở dữ liệu quốc gia về dân cư, phục vụ hiển thị thông tin lý lịch tư pháp trên VNeID."
+    ]}
+  ]
+}
+];
+
+
+/* ---------- Library ---------- */
+const $ = s => document.querySelector(s);
+let filter = "all", topic = "all";
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d");}
+function docText(d){return [d.code,d.title,d.issuer,d.date,d.status||"",...d.sections.flatMap(s=>[s.h,...s.items])].join(" ");}
+
+function renderTopics(){
+  const c = $("#topics"); c.innerHTML = "";
+  for(const [k,label] of [["all","Tất cả chủ đề"],...Object.entries(TOPICS)]){
+    const b=document.createElement("button");
+    b.className="chip"; b.textContent=label; b.setAttribute("aria-pressed", String(topic===k));
+    b.onclick=()=>{topic=k;renderTopics();renderDocs();};
+    c.appendChild(b);
+  }
+}
+function renderChips(){
+  const c = $("#chips");
+  const opts = [["all","Mọi loại văn bản"],...Object.entries(TYPES).filter(([k])=>DOCS.some(d=>d.type===k))];
+  c.innerHTML = "";
+  for(const [k,label] of opts){
+    const b=document.createElement("button");
+    b.className="chip"; b.textContent=label; b.setAttribute("aria-pressed", String(filter===k));
+    b.onclick=()=>{filter=k;renderChips();renderDocs();};
+    c.appendChild(b);
+  }
+}
+function renderDocs(){
+  const q = norm($("#q").value.trim());
+  const list = DOCS.filter(d => (filter==="all"||d.type===filter) && (topic==="all"||d.topic===topic) && (!q || norm(docText(d)).includes(q)));
+  $("#count").textContent = list.length + " văn bản";
+  const ul = $("#docs"); ul.innerHTML="";
+  if(!list.length){ul.innerHTML='<li class="empty">Không có văn bản khớp. Thử từ khóa khác hoặc bỏ bớt bộ lọc.</li>';return;}
+  for(const d of list){
+    const li=document.createElement("li");
+    li.className="folder"; li.dataset.type=d.type;
+    const tab=document.createElement("span"); tab.className="tab"; tab.textContent=(d.label||(d.type==="kh"?(d.code.startsWith("01-KH")?"Kế hoạch":"Văn bản"):TYPES[d.type]))+" "+d.code; li.appendChild(tab);
+    const body=document.createElement("div"); body.className="f-body";
+    const h=document.createElement("h2"); h.className="f-title"; h.textContent=d.title;
+    const m=document.createElement("p"); m.className="f-meta"; m.textContent=d.issuer+" – "+d.date;
+    body.append(h,m);
+    if(d.status){const st=document.createElement("p"); st.className="f-status"; st.textContent="Tình trạng (9/2026): "+d.status; body.appendChild(st);}
+    const det=document.createElement("details");
+    if(q) det.open=true;
+    const sum=document.createElement("summary"); sum.textContent="Nội dung cần nắm"; det.appendChild(sum);
+    const pts=document.createElement("div"); pts.className="points";
+    for(const s of d.sections){
+      const h4=document.createElement("h4"); h4.textContent=s.h; pts.appendChild(h4);
+      const u=document.createElement("ul");
+      for(const it of s.items){const l=document.createElement("li"); l.textContent=it; u.appendChild(l);}
+      pts.appendChild(u);
+    }
+    det.appendChild(pts); body.appendChild(det);
+    if(d.file||d.url){
+      const act=document.createElement("div"); act.className="f-actions";
+      const link=(href,text,cls)=>{const a=document.createElement("a"); a.className=cls; a.href=href; a.target="_blank"; a.rel="noopener"; a.textContent=text; act.appendChild(a);};
+      for(const f of [].concat(d.file||[])){
+        const [name,label]=typeof f==="string"?[f,"Xem văn bản gốc (PDF)"]:[f.name,f.label];
+        link(/^https?:/.test(name)?name:"tai-lieu/"+encodeURIComponent(name),label,"btn solid");
+      }
+      if(d.url) link(d.url,"Xem toàn văn","btn");
+      body.appendChild(act);
+    }
+    li.appendChild(body); ul.appendChild(li);
+  }
+}
+$("#q").addEventListener("input", renderDocs);
+
+renderTopics(); renderChips(); renderDocs();
+</script>
+</body>
+</html>
