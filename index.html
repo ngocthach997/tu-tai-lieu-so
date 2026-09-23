@@ -49,6 +49,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font:500 14px var(--sans);padding:7px 13px;border-radius:999px;cursor:pointer}
 .chips-type{padding-top:4px}
+.group-h{list-style:none;font-family:var(--serif);font-weight:700;font-size:21px;margin:6px 0 -8px;padding-bottom:6px;border-bottom:2px solid var(--gold);color:var(--green)}
+.group-h:first-child{margin-top:-14px}
 .chips-type .chip{font-size:13px;padding:5px 11px}
 .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--surface)}
 .count{font-size:13px;color:var(--muted);margin:10px 0 0}
@@ -89,15 +91,15 @@ a.btn{text-decoration:none;display:inline-block}
 <body>
 <header class="top wrap">
   <h1>Tủ tài liệu số</h1>
-  <p class="lede">Tra cứu nhanh các văn bản về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số, Đề án 06 và lý lịch tư pháp.</p>
+  <p class="lede">Tra cứu luật, nghị quyết, nghị định, thông tư, quyết định, đề án, chỉ thị và văn bản chỉ đạo của Công an tỉnh về khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số, Đề án 06 và lý lịch tư pháp.</p>
 </header>
 
 <main>
   <section id="lib" class="wrap">
     <div class="tools">
       <input id="q" class="search" type="search" placeholder="Tìm theo số hiệu, tên, nội dung…" aria-label="Tìm văn bản">
-      <div class="chips" id="topics" role="group" aria-label="Lọc theo chủ đề"></div>
-      <div class="chips chips-type" id="chips" role="group" aria-label="Lọc theo loại"></div>
+      <div class="chips" id="topics" role="group" aria-label="Lọc theo loại văn bản"></div>
+      <div class="chips chips-type" id="chips" role="group" aria-label="Lọc phụ theo chủ đề"></div>
       <p class="count" id="count"></p>
     </div>
     <ul class="docs" id="docs"></ul>
@@ -1478,37 +1480,42 @@ const DOCS = [
 
 /* ---------- Library ---------- */
 const $ = s => document.querySelector(s);
-let filter = "all", topic = "all";
+let group = "all", sub = "all";
+const GROUPS = [["luat","Luật"],["nq","Nghị quyết"],["nd","Nghị định"],["tt","Thông tư"],["qd","Quyết định, Đề án"],["ct","Chỉ thị"],["kh","Kế hoạch, Thông báo"],["cat","Văn bản chỉ đạo của Công an tỉnh"]];
+const CATSUB = {cv:"Công văn", kh:"Kế hoạch, chương trình", qd:"Quyết định", bc:"Báo cáo, thông báo", tb:"Báo cáo, thông báo"};
+const groupOf = d => d.topic==="cat" ? "cat" : d.type;
+const subOf = d => d.topic==="cat" ? (d.type==="tb"?"bc":d.type) : d.topic;
+const dateKey = d => { const m=/(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(d.date); return m ? +m[3]*10000 + +m[2]*100 + +m[1] : 0; };
 function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d");}
 function docText(d){return [d.code,d.title,d.issuer,d.date,d.status||"",...d.sections.flatMap(s=>[s.h,...s.items])].join(" ");}
-
+function chip(c,label,on,fn){const b=document.createElement("button"); b.className="chip"; b.textContent=label; b.setAttribute("aria-pressed",String(on)); b.onclick=fn; c.appendChild(b);}
 function renderTopics(){
   const c = $("#topics"); c.innerHTML = "";
-  for(const [k,label] of [["all","Tất cả chủ đề"],...Object.entries(TOPICS)]){
-    const b=document.createElement("button");
-    b.className="chip"; b.textContent=label; b.setAttribute("aria-pressed", String(topic===k));
-    b.onclick=()=>{topic=k;renderTopics();renderDocs();};
-    c.appendChild(b);
+  chip(c,"Tất cả ("+DOCS.length+")",group==="all",()=>{group="all";sub="all";renderTopics();renderChips();renderDocs();});
+  for(const [k,label] of GROUPS){
+    const n = DOCS.filter(d=>groupOf(d)===k).length; if(!n) continue;
+    chip(c,label+" ("+n+")",group===k,()=>{group=k;sub="all";renderTopics();renderChips();renderDocs();});
   }
 }
 function renderChips(){
-  const c = $("#chips");
-  const opts = [["all","Mọi loại văn bản"],...Object.entries(TYPES).filter(([k])=>DOCS.some(d=>d.type===k))];
-  c.innerHTML = "";
-  for(const [k,label] of opts){
-    const b=document.createElement("button");
-    b.className="chip"; b.textContent=label; b.setAttribute("aria-pressed", String(filter===k));
-    b.onclick=()=>{filter=k;renderChips();renderDocs();};
-    c.appendChild(b);
-  }
-}
-function renderDocs(){
+  const c = $("#chips"); c.innerHTML = "";
+  const pool = DOCS.filter(d=>group==="all"||groupOf(d)===group);
+  const opts = group==="cat" ? Object.entries(CATSUB).filter(([k],i,a)=>a.findIndex(x=>x[1]===CATSUB[k])===i) : Object.entries(TOPICS).filter(([k])=>k!=="cat");
+  const avail = opts.filter(([k])=>pool.some(d=>subOf(d)===k));
+  if(avail.length<2){c.hidden=true;return;} c.hidden=false;
+  chip(c,group==="cat"?"Mọi loại":"Mọi chủ đề",sub==="all",()=>{sub="all";renderChips();renderDocs();});
+  for(const [k,label] of avail) chip(c,label,sub===k,()=>{sub=k;renderChips();renderDocs();});
+}function renderDocs(){
   const q = norm($("#q").value.trim());
-  const list = DOCS.filter(d => (filter==="all"||d.type===filter) && (topic==="all"||d.topic===topic) && (!q || norm(docText(d)).includes(q)));
+  const list = DOCS.filter(d => (group==="all"||groupOf(d)===group) && (sub==="all"||subOf(d)===sub) && (!q || norm(docText(d)).includes(q)));
   $("#count").textContent = list.length + " văn bản";
   const ul = $("#docs"); ul.innerHTML="";
   if(!list.length){ul.innerHTML='<li class="empty">Không có văn bản khớp. Thử từ khóa khác hoặc bỏ bớt bộ lọc.</li>';return;}
-  for(const d of list){
+  const ordered = [];
+  for(const [k,label] of GROUPS){ const g=list.filter(d=>groupOf(d)===k).sort((a,b)=>dateKey(b)-dateKey(a)); if(g.length) ordered.push([label,g]); }
+  for(const [label,g] of ordered){
+  if(group==="all"){const gh=document.createElement("li"); gh.className="group-h"; gh.textContent=label+" · "+g.length; ul.appendChild(gh);}
+  for(const d of g){
     const li=document.createElement("li");
     li.className="folder"; li.dataset.type=d.type;
     const tab=document.createElement("span"); tab.className="tab"; tab.textContent=(d.label||(d.type==="kh"?(/CTr/.test(d.code)?"Chương trình":/KH/.test(d.code)?"Kế hoạch":"Văn bản"):TYPES[d.type]))+" "+d.code; li.appendChild(tab);
@@ -1539,6 +1546,7 @@ function renderDocs(){
       body.appendChild(act);
     }
     li.appendChild(body); ul.appendChild(li);
+  }
   }
 }
 $("#q").addEventListener("input", renderDocs);
