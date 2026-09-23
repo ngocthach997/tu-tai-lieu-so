@@ -61,6 +61,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .folder[data-type="tt"]{--tabc:var(--t-tt)}
 .folder[data-type="ct"]{--tabc:var(--t-ct)}
 .folder[data-type="kh"]{--tabc:var(--t-kh)}
+.folder[data-type="cv"]{--tabc:var(--t-ct)} .folder[data-type="tb"],.folder[data-type="bc"]{--tabc:var(--t-tt)}
 .folder{border-left:4px solid var(--tabc)}
 .f-body{padding:16px 16px 14px}
 .f-title{font-family:var(--serif);font-weight:700;font-size:18.5px;line-height:1.35;margin:0 0 6px}
@@ -100,13 +101,13 @@ a.btn{text-decoration:none;display:inline-block}
       <p class="count" id="count"></p>
     </div>
     <ul class="docs" id="docs"></ul>
-    <p class="note">Nội dung là bản tóm lược phục vụ quán triệt, học tập. Khi trích dẫn trong văn bản chính thức, đối chiếu với văn bản gốc.</p>
+    <p class="note">Nội dung là bản tóm lược phục vụ quán triệt, học tập; văn bản của Bộ Công an, Công an tỉnh chỉ nêu số hiệu và nội dung chính, không đăng toàn văn. Khi trích dẫn trong văn bản chính thức, đối chiếu với văn bản gốc.</p>
   </section>
 </main>
 
 <script>
-const TOPICS = {t57:"Nghị quyết 57 & chuyển đổi số", t06:"Đề án 06 & định danh", tdl:"Dữ liệu, an ninh mạng, AI", tll:"Lý lịch tư pháp"};
-const TYPES = {nq:"Nghị quyết", qd:"Quyết định", ct:"Chỉ thị", luat:"Luật", nd:"Nghị định", tt:"Thông tư", kh:"Kế hoạch, văn bản khác"};
+const TOPICS = {t57:"Nghị quyết 57 & chuyển đổi số", t06:"Đề án 06 & định danh", tdl:"Dữ liệu, an ninh mạng, AI", tll:"Lý lịch tư pháp", cat:"Chỉ đạo của Công an tỉnh"};
+const TYPES = {nq:"Nghị quyết", qd:"Quyết định", ct:"Chỉ thị", luat:"Luật", nd:"Nghị định", tt:"Thông tư", kh:"Kế hoạch, chương trình", cv:"Công văn", tb:"Thông báo", bc:"Báo cáo"};
 
 const DOCS = [
 {
@@ -188,13 +189,80 @@ const DOCS = [
   ]
 },
 {
+  id:"nq26", topic:"t57", type:"nq", code:"26-NQ/ĐUCA",
+  title:"Nghị quyết về tập trung lãnh đạo thực hiện thắng lợi nhiệm vụ phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số trong Công an nhân dân",
+  issuer:"Đảng ủy Công an Trung ương", date:"30/6/2025",
+  sections:[
+    {h:"Điểm cần nắm", items:[
+      "Là nghị quyết của Đảng ủy Công an Trung ương cụ thể hóa Nghị quyết 57-NQ/TW trong lực lượng CAND; được quán triệt đến toàn thể cán bộ, chiến sĩ.",
+      "Công an các địa phương thành lập Ban Chỉ đạo về phát triển KHCN, ĐMST, CĐS và Đề án 06, kiện toàn tổ giúp việc, tổ công tác từ tỉnh đến cơ sở.",
+      "Gắn với phong trào \"Bình dân học vụ số\" trong CAND, nâng cao kỹ năng số cho cán bộ, chiến sĩ.",
+      "Cấp ủy các cấp tăng cường kiểm tra, giám sát việc quán triệt, cụ thể hóa và tổ chức thực hiện; xác định rõ nhiệm vụ đã làm, còn chậm, nguyên nhân và trách nhiệm.",
+      "Nội dung chi tiết (mục tiêu, chỉ tiêu, nhiệm vụ): đơn vị đối chiếu văn bản gốc."
+    ]}
+  ]
+},
+{
+  id:"qd5338", topic:"t57", type:"qd", code:"5338/QĐ-BCA",
+  title:"Quyết định phê duyệt Đề án chuyển đổi số toàn diện trong Công an nhân dân đến năm 2030",
+  issuer:"Bộ trưởng Bộ Công an (Đại tướng Lương Tam Quang ký)", date:"24/6/2025 · hiệu lực từ ngày ký · thay thế QĐ 2612/QĐ-BCA ngày 20/4/2021",
+  sections:[
+    {h:"Phạm vi, đối tượng, thời gian", items:[
+      "Triển khai trong toàn lực lượng CAND từ Trung ương tới cơ sở (03 cấp Công an); giai đoạn 2025–2030.",
+      "Đối tượng: các đơn vị trực thuộc Bộ, Công an các tỉnh, thành phố, các học viện, trường, bệnh viện CAND và lãnh đạo, cán bộ, chiến sĩ CAND.",
+      "\"Chuyển đổi số toàn diện trong CAND\" là đưa các hoạt động của lực lượng Công an từ Trung ương tới cơ sở lên môi trường số dựa trên dữ liệu và nền tảng số, gồm cả quản lý điều hành và hoạt động nghiệp vụ."
+    ]},
+    {h:"Quan điểm chỉ đạo", items:[
+      "Chuyển đổi số là trách nhiệm của cấp ủy Đảng, trực tiếp là người đứng đầu cấp ủy, Thủ trưởng đơn vị, địa phương; xây dựng \"Văn hóa dữ liệu, Tư duy số\".",
+      "Lực lượng CAND gương mẫu, đi đầu thực hiện Nghị quyết 57-NQ/TW và Nghị quyết 71/NQ-CP; gắn chuyển đổi số với cải cách thủ tục hành chính và đổi mới các mặt công tác nghiệp vụ.",
+      "Lấy cán bộ, chiến sĩ làm trung tâm; từng bước hình thành thế hệ cán bộ \"Công an số\".",
+      "Phát triển hạ tầng theo nguyên tắc \"hiện đại, đồng bộ, an ninh, an toàn, bảo mật, tránh lãng phí\"; cơ sở dữ liệu thống nhất, liên thông quy trình nghiệp vụ, chia sẻ dữ liệu."
+    ]},
+    {h:"Một số chỉ tiêu đến năm 2030", items:[
+      "Tỷ lệ sử dụng dịch vụ công trực tuyến của người dân, doanh nghiệp tại Công an các đơn vị, địa phương trên 80%; dịch vụ công trực tuyến toàn trình đạt 90% số thủ tục đủ điều kiện.",
+      "Số hóa hồ sơ, kết quả giải quyết thủ tục hành chính đạt 100%; cấp kết quả giải quyết thủ tục hành chính điện tử đạt 100%.",
+      "Khai thác, sử dụng lại dữ liệu đã số hóa trong giải quyết thủ tục hành chính đạt 80%; thanh toán trực tuyến đạt 80%.",
+      "Thủ tục hành chính tiếp nhận, giải quyết phi địa giới hành chính đạt 90%; cắt giảm thủ tục hành chính nội bộ đạt 50%.",
+      "Xử lý văn bản, hồ sơ toàn trình trên môi trường điện tử và chỉ đạo, điều hành, quản trị nội bộ của Công an các đơn vị, địa phương đạt 100%.",
+      "Chi ngân sách hằng năm cho KHCN, ĐMST, CĐS ngành Công an tối thiểu 3%."
+    ]},
+    {h:"Năm nhóm nhiệm vụ, giải pháp", items:[
+      "Hoàn thiện thể chế.",
+      "Hoàn thiện hạ tầng số và xây dựng các nền tảng số (VNeID, hệ thống giải quyết thủ tục hành chính, \"Nền tảng quản lý, điều hành trung tâm\" từ Bộ đến cấp xã...).",
+      "Phát triển dữ liệu số.",
+      "Bảo đảm an ninh, an toàn, bảo mật.",
+      "Bảo đảm nguồn lực, trong đó có phong trào \"Bình dân học vụ số\" trong CAND."
+    ]},
+    {h:"Nhiệm vụ của Công an địa phương", items:[
+      "Rà soát, tái cấu trúc, đổi mới quy trình nghiệp vụ, mô hình quản lý, điều hành dựa trên dữ liệu.",
+      "Số hóa hồ sơ, tài liệu, phát triển dữ liệu tập trung, thống nhất, kết nối, chia sẻ theo phân cấp, phân quyền; tiếp tục số hóa để lưu trữ điện tử phục vụ nghiệp vụ và dịch vụ công trực tuyến.",
+      "Phát triển ứng dụng phục vụ công tác nghiệp vụ trên \"Nền tảng quản lý, điều hành trung tâm\" (phối hợp V01).",
+      "Công an tỉnh xây dựng Kế hoạch thực hiện bao phủ địa bàn hành chính mới sau sắp xếp (hạn trước 10/7/2025).",
+      "Báo cáo tình hình triển khai về Văn phòng Bộ trước ngày 20 hằng tháng; sơ kết theo quý, 6 tháng, hằng năm."
+    ]}
+  ]
+},
+{
+  id:"qd7626", topic:"t57", type:"qd", code:"7626/QĐ-BCA",
+  title:"Chiến lược phát triển dữ liệu và quy hoạch tổng thể hạ tầng Trung tâm dữ liệu ngành Công an",
+  issuer:"Bộ Công an", date:"Năm 2025 · ngày ban hành: đối chiếu văn bản gốc",
+  sections:[
+    {h:"Điểm cần nắm", items:[
+      "Cụ thể hóa nhiệm vụ \"Phát triển dữ liệu số\" của Đề án chuyển đổi số toàn diện trong CAND (QĐ 5338/QĐ-BCA).",
+      "Cùng Nghị quyết 26-NQ/ĐUCA và QĐ 5338/QĐ-BCA tạo khung định hướng hoạt động KHCN, ĐMST và CĐS của lực lượng CAND.",
+      "Nội dung chi tiết: đơn vị đối chiếu văn bản gốc."
+    ]}
+  ]
+},
+{
   id:"nq11", url:"https://vanban.chinhphu.vn/?pageid=27160&docid=216653", topic:"t57", type:"nq", code:"11/NQ-CP",
   title:"Nghị quyết sửa đổi, bổ sung, cập nhật Nghị quyết 71/NQ-CP về Chương trình hành động của Chính phủ thực hiện Nghị quyết 57-NQ/TW",
   issuer:"Chính phủ", date:"14/01/2026",
   sections:[
     {h:"Nội dung chính", items:[
       "Sửa đổi, cập nhật danh mục chỉ tiêu tại Phụ lục I của Chương trình hành động (bỏ chỉ tiêu \"tỷ lệ cơ quan nhà nước chỉ đạo, điều hành, quản trị nội bộ trên môi trường điện tử\").",
-      "Sửa đổi, bổ sung, cập nhật danh mục nhiệm vụ tại Phụ lục II."
+      "Sửa đổi, bổ sung, cập nhật danh mục nhiệm vụ tại Phụ lục II.",
+      "Là căn cứ để Bộ Công an, Công an các địa phương cập nhật kế hoạch thực hiện Nghị quyết 57 năm 2026 (như KH 2900/KH-CAT-PV01, KH 5602/KH-CAT-PV01)."
     ]}
   ]
 },
@@ -233,6 +301,7 @@ const DOCS = [
     ]},
     {h:"Văn bản liên quan", items:[
       "Kế hoạch số 139-KH/BTGDVTW ngày 16/7/2026 của Ban Tuyên giáo và Dân vận Trung ương về đẩy mạnh thông tin, tuyên truyền phong trào.",
+      "Trong Công an tỉnh: Kế hoạch 781/KH-CAT-PV01 (Khung năng lực số) và phong trào gắn với Nghị quyết 26-NQ/ĐUCA.",
       "Cán bộ Phòng thuộc nhóm phải đạt chỉ tiêu kỹ năng số; có thể lồng ghép hướng dẫn người dân nộp hồ sơ cấp Phiếu lý lịch tư pháp trực tuyến qua VNeID."
     ]}
   ]
@@ -912,7 +981,495 @@ const DOCS = [
   sections:[
     {h:"Nội dung chính", items:[
       "Rà soát, xác minh, chuẩn hóa dữ liệu lý lịch tư pháp theo từng nhóm tuổi, nhóm đối tượng; cập nhật dữ liệu phát sinh mới.",
-      "Đồng bộ dữ liệu với Cơ sở dữ liệu quốc gia về dân cư, phục vụ hiển thị thông tin lý lịch tư pháp trên VNeID."
+      "Đồng bộ dữ liệu với Cơ sở dữ liệu quốc gia về dân cư, phục vụ hiển thị thông tin lý lịch tư pháp trên VNeID.",
+      "Trong Công an tỉnh, gắn với nhiệm vụ PV06 chủ trì \"rà soát, làm sạch dữ liệu án tích, căn cước can phạm và cấp Phiếu lý lịch tư pháp trên VNeID\" (Chương trình 3040/CTr-BCĐ, KH 3911/KH-CAT-PC06, CV 7547/CAT-PV01)."
+    ]}
+  ]
+},
+{
+  id:"cat10577", topic:"cat", type:"cv", code:"10577/CAT-PV01",
+  title:"V/v triển khai các nhiệm vụ trọng tâm theo Công văn số 10021 và 10168 của Bộ Công an",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"07/9/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Phổ biến ngay Thông báo 10021/V01-P3 và CV 10168/V01-TTTTCH (kèm phụ lục giải đáp 19 vấn đề pháp lý, kinh phí, kỹ thuật) tới toàn bộ CBCS trực tiếp giải quyết thủ tục hành chính.",
+      "Thực hiện nghiêm TT 143/2026/TT-BCA về chế độ báo cáo: không có kỳ báo cáo tuần, Công an cấp xã không báo cáo ngày với nội dung không mật.",
+      "Khi hệ thống lỗi, liên hệ đầu mối hỗ trợ của các Cục nghiệp vụ (theo phụ lục CV 10168), không để người dân chờ lâu.",
+      "Tiếp tục KH 8548/KH-CAT-PV01 (100 ngày): PC06 làm sạch dữ liệu dân cư, nghiêm cấm yêu cầu dân cung cấp lại dữ liệu đã có; PH10 cấp phát thiết bị đầu cuối ưu tiên Công an cấp xã; PX01 hỗ trợ người làm công tác chuyên trách theo TT 12/2026/TT-BCA.",
+      "PV01 lập danh sách nhiệm vụ \"đỏ\" theo dõi hằng tuần, trực tiếp kiểm chứng sản phẩm, báo cáo Giám đốc nhiệm vụ có nguy cơ chậm."
+    ]}
+  ]
+},
+{
+  id:"cat10578", topic:"cat", type:"cv", code:"10578/CAT-PV01",
+  title:"V/v triển khai thực hiện nhiệm vụ Cơ quan Thường trực Ban Chỉ đạo 57 trong Công an tỉnh",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"07/9/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 9872/V01-P3 ngày 24/8/2026: nhiệm vụ Cơ quan Thường trực BCĐ 57 là trọng tâm, gồm thực hiện nhiệm vụ được giao; theo dõi, điều phối KHCN, CĐS, CCHC, Đề án 06; bảo đảm an ninh, an ninh dữ liệu.",
+      "PV01 chủ trì tham mưu vai trò Cơ quan Thường trực BCĐ 57 (sau khi nhận chuyển giao từ Tỉnh ủy), đôn đốc sở, ngành, UBND cấp xã; báo cáo Văn phòng Bộ trước ngày 15 hằng tháng.",
+      "PC06: làm sạch dữ liệu dân cư, thúc đẩy VNeID, mỗi xã, phường có ít nhất 01 mô hình cộng đồng số/khu dân cư số kiểu mẫu. PA05: Tổ công tác an ninh mạng, bảo vệ dữ liệu cá nhân, bảo vệ hồ sơ điện tử bằng mật mã chuyên dùng.",
+      "Công an xã, phường: làm sạch dữ liệu dân cư; không yêu cầu dân nộp lại giấy tờ đã có; tạo lập hồ sơ điện tử, văn bản điện tử, ký số, số hóa hồ sơ, tài liệu và cập nhật đầy đủ lên hệ thống; bảo vệ bí mật nhà nước."
+    ]}
+  ]
+},
+{
+  id:"cat10168", topic:"cat", type:"cv", code:"10168/V01-TTTTCH",
+ 
+  title:"V/v giải đáp, hướng dẫn một số nội dung về triển khai dịch vụ công trực tuyến, chuyển đổi số và chế độ thông tin, báo cáo",
+  issuer:"Văn phòng Bộ Công an (Phó Chánh Văn phòng ký)", date:"29/8/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "V01 phối hợp A08, C06, C07, C08, V03, V06, H01, H05 giải đáp 19 vấn đề vướng mắc về dịch vụ công trực tuyến, CĐS và chế độ báo cáo (nội dung không mật), chia 3 nhóm: pháp lý, kinh phí, giải pháp kỹ thuật.",
+      "Chế độ báo cáo: không quy định kỳ báo cáo tuần và không quy định Công an cấp xã báo cáo ngày.",
+      "Kết nối, chia sẻ dữ liệu qua iLGSP/oLGSP; về kinh phí, Công an tỉnh chủ động cân đối hoặc đề nghị UBND tỉnh hỗ trợ."
+    ]},
+    {h:"Giải đáp về lý lịch tư pháp (V06, mục 17–19)", items:[
+      "Thông tư 101/2026/TT-BCA quy định cơ sở dữ liệu và thủ tục cấp Phiếu; biểu mẫu đã chuẩn hóa trên Cổng DVC quốc gia, VNeID, tự động điền dữ liệu dân cư.",
+      "QĐ 4192/QĐ-BCA ngày 30/6/2026 về quy trình cấp Phiếu trên Cổng DVC quốc gia/VNeID: hồ sơ \"đúng, đủ, sạch, sống\" được rút ngắn còn 08 giờ làm việc.",
+      "KH 656/KH-BCA-V06 ngày 12/8/2026 về làm sạch dữ liệu lý lịch tư pháp và hiển thị thông tin trên VNeID; đề nghị các đơn vị triển khai.",
+      "Từ 01/6/2026 dịch vụ cấp Phiếu cung cấp trên Cổng DVC quốc gia liên thông VNeID; Cổng DVC tỉnh ngừng cung cấp; V06 đã phối hợp V01, C06 hướng dẫn xử lý dứt điểm hồ sơ tồn, hồ sơ bị treo."
+    ]}
+  ]
+},
+{
+  id:"cat10021", topic:"cat", type:"cv", code:"10021/V01-P3",
+  title:"V/v thông báo chỉ đạo của lãnh đạo Bộ",
+  issuer:"Văn phòng Bộ Công an (Phó Chánh Văn phòng ký)", date:"26/8/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thông báo ý kiến chỉ đạo của Thứ trưởng về kết quả Kế hoạch hành động 100 ngày xử lý điểm nghẽn CĐS tháng 8/2026.",
+      "Dữ liệu: C06, C12 đôn đốc hoàn thành các CSDL trọng yếu chưa xây dựng, chưa kết nối; C06 đối soát, làm sạch CSDL dân cư, xây dựng CSDL xử lý vi phạm hành chính, định danh địa điểm theo mốc 30/9 và 30/11/2026.",
+      "Hạ tầng: H01 và Công an địa phương bảo đảm có thiết bị đầu cuối thực tế tại cơ sở.",
+      "Pháp lý, nguồn lực: chi trả chế độ theo TT 12/2026/TT-BCA; X01 đề xuất bổ sung đối tượng hưởng chế độ.",
+      "Kỷ luật thực thi: V01 lập danh sách nhiệm vụ \"đỏ\" hằng tuần, trực tiếp kiểm chứng sản phẩm; không lấy báo cáo tự nhận của đơn vị làm căn cứ xác nhận hoàn thành."
+    ]}
+  ]
+},
+{
+  id:"cat145", topic:"cat", type:"kh", code:"145-KH/ĐUCA",
+  title:"Kế hoạch hành động 100 ngày tập trung xử lý các điểm nghẽn về chuyển đổi số trong Đảng bộ Công an tỉnh Gia Lai",
+  issuer:"Đảng ủy Công an tỉnh (Phó Bí thư ký)", date:"24/8/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Căn cứ KH 03-KH/BCĐ ngày 12/8/2026 của BCĐ tỉnh, KH 8548/KH-CAT-PV01 và CV 9607/CAT-PV01.",
+      "Xử lý dứt điểm các điểm nghẽn thuộc trách nhiệm Đảng ủy trước 30/11/2026; 100% nhiệm vụ CĐS quá hạn giải quyết xong trước 30/8/2026.",
+      "Chỉ tiêu: tối thiểu 98% dữ liệu đảng viên được rà soát, chuẩn hóa, đồng bộ lên CSDL dùng chung của Tỉnh ủy; tối thiểu 95% CBCS được bồi dưỡng kỹ năng số, an toàn thông tin mạng, tiếp cận AI; 100% chi, đảng bộ kiểm kê thiết bị đầu cuối.",
+      "Nguyên tắc \"6 rõ\", cơ chế \"1 xuyên suốt\"; Bí thư các chi, đảng bộ chịu trách nhiệm toàn diện.",
+      "100% CBCS có đủ thiết bị đầu cuối trước 20/11/2026; PV01 rà soát phần mềm dùng chung, chuyên ngành để tránh đầu tư trùng lặp."
+    ]}
+  ]
+},
+{
+  id:"cat9050", topic:"cat", type:"cv", code:"9050/CAT-PV01",
+  title:"V/v rà soát thực hiện các tiêu chí chấm điểm người đứng đầu về Nghị quyết 57 tháng 8/2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"03/8/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện QĐ 886/QĐ-BCA-V01 ngày 15/02/2026, bảo đảm tiêu chí chấm điểm Giám đốc Công an tỉnh tháng 8/2026 (kỳ 15/7–14/8/2026).",
+      "Trưởng các phòng rà soát toàn bộ văn bản chỉ đạo về KHCN, ĐMST, CCHC, CĐS, Đề án 06, tham mưu triển khai xong trước 05/8/2026, có sản phẩm minh chứng.",
+      "PA05 tổ chức 02 cuộc diễn tập bảo đảm an ninh an toàn hệ thống CNTT; PC06 báo cáo vướng mắc Đề án 06; PH10 huy động nguồn lực xã hội hóa, bảo đảm chi 3% ngân sách; PX01 mở lớp bồi dưỡng."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "PV06 chủ trì theo dõi, đôn đốc để tỷ lệ trình tự, thủ tục trong điều tra hình sự và công tác nghiệp vụ cơ bản thực hiện trên môi trường điện tử đạt từ 70% trở lên, hoàn thành trước 10/8/2026."
+    ]}
+  ]
+},
+{
+  id:"cat8844", topic:"cat", type:"cv", code:"8844/CAT-PV01",
+  title:"V/v triển khai các nhiệm vụ trọng tâm theo Thông báo số 24, 25-TB/CQTTBCĐ",
+  issuer:"Công an tỉnh Gia Lai (Giám đốc ký)", date:"28/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Quán triệt NQ 57-NQ/TW (gắn với NQ Đại hội XIV) và kết luận của Tổng Bí thư tại Thông báo 24, 25-TB/CQTTBCĐ; người đứng đầu trực tiếp chỉ đạo, chịu trách nhiệm; không giao khoán, không hình thức.",
+      "Triển khai KH 8548/KH-CAT-PV01 (Hành động 100 ngày xử lý điểm nghẽn CĐS), hoàn thành 100% nhiệm vụ trước 30/11/2026, gồm 6 nhóm: xử lý nhiệm vụ quá hạn; dữ liệu và nền tảng dùng chung; CĐS chính quyền 3 cấp; ứng dụng AI an toàn; an ninh mạng, bảo vệ dữ liệu; kiểm tra, giám sát theo sản phẩm đầu ra.",
+      "Không coi là hoàn thành nếu chỉ ban hành văn bản, kế hoạch, hội nghị, thành lập bộ máy; sản phẩm phải vận hành, có dữ liệu kiểm chứng, hiệu quả đo đếm được.",
+      "Dữ liệu \"đúng, đủ, sạch, sống, thống nhất, dùng chung\"; báo cáo tuần (thứ Tư) và báo cáo tháng lồng ghép báo cáo NQ 57, gửi PV01 (Đội CNTT)."
+    ]}
+  ]
+},
+{
+  id:"cat1536", topic:"cat", type:"cv", code:"1536/PV01-Đ6",
+  title:"V/v thông báo kế hoạch đặt hàng, tài trợ nhiệm vụ KH, CN & ĐMST năm 2027",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"28/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Sao gửi CV 4351/V04-P2 ngày 21/7/2026 của Cục Khoa học, Chiến lược và Lịch sử Công an về đặt hàng, tài trợ nhiệm vụ KH, CN và ĐMST năm 2027.",
+      "Các đơn vị nghiên cứu, đề xuất theo chức năng, gửi PV01 (Đội Pháp chế và Quản lý khoa học) trước 18/8/2026."
+    ]}
+  ]
+},
+{
+  id:"cat8781", topic:"cat", type:"kh", code:"8781/KH-CAT-PX03",
+  title:"Hưởng ứng Phong trào thi đua \"Đổi mới sáng tạo, phát triển khoa học, công nghệ, chuyển đổi số, chuyển đổi xanh\" trong lực lượng Công an tỉnh",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"27/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Triển khai KH 525/KH-BCA-X03 ngày 30/6/2026 và KH 152/KH-UBND ngày 20/4/2026; gắn với phong trào \"Ba Nhất\"; đưa chỉ tiêu công nghệ, số hóa vào đánh giá thi đua hằng tháng, hằng năm.",
+      "Mỗi đơn vị chọn ít nhất 01 khâu đột phá về công nghệ hoặc 01 mô hình chuyển đổi xanh, hoàn thành trong năm 2026, đo bằng chỉ số định lượng.",
+      "Các đơn vị xây dựng kế hoạch hưởng ứng gửi Phòng Công tác chính trị trước 30/7/2026; báo cáo 6 tháng (trước 15/6) và năm (trước 15/12)."
+    ]}
+  ]
+},
+{
+  id:"cat1528", topic:"cat", type:"cv", code:"1528/PV01-Đ4",
+  title:"V/v kiểm đếm nhiệm vụ, chỉ tiêu thực hiện Nghị quyết 57",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"26/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện Thông báo 1421/TB-CQTTBCĐ: kiểm đếm hằng tuần, hằng tháng nhiệm vụ, chỉ tiêu NQ 57; báo cáo tổng thể từ đầu năm gửi PV01 trước 17h00 ngày 29/7/2026, sau đó cập nhật hằng tuần trước 17h00 thứ Tư.",
+      "Công an cấp xã báo cáo chỉ tiêu \"Mỗi người dân có một định danh số\"; PH10 báo cáo chỉ tiêu chi 3% ngân sách."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "Báo cáo nhiệm vụ có thời hạn: số đã hoàn thành (kèm sản phẩm), số đang thực hiện (tiến độ, vướng mắc).",
+      "Báo cáo chỉ tiêu tiếp nhận, giải quyết dịch vụ công trực tuyến từ đầu năm (số lượng, tỷ lệ)."
+    ]}
+  ]
+},
+{
+  id:"cat1450", topic:"cat", type:"cv", code:"1450/PV01-Đ4",
+  title:"V/v chấm điểm người đứng đầu trong thực hiện Nghị quyết 57 tháng 7/2026",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"21/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện QĐ 8020/QĐ-CAT-PV01: Bộ chỉ số KPI (file excel) chấm điểm tháng 7/2026 (kỳ 15/6–14/7/2026).",
+      "PC06, PC07, PC08, PA08, PV06 và Công an cấp xã tự chấm theo Phụ lục I; các đơn vị khác theo Phụ lục II; gửi trước 23/7/2026 qua phần mềm Quản lý văn bản và điều hành (không nhận văn bản giấy).",
+      "PV06 cùng PX01, PX03, PH10, PA03, PA05, PA08, PC06, PC07, PC08 thẩm định kết quả tự chấm, gửi PV01 trước 27/7/2026."
+    ]}
+  ]
+},
+{
+  id:"cat1374", topic:"cat", type:"cv", code:"1374/PV01-Đ4",
+  title:"V/v thực hiện chấm điểm người đứng đầu Công an tỉnh tháng 7/2026",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"13/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 7785/V01-TTTTCH ngày 12/7/2026; các đơn vị chủ trì theo CV 2985/CAT-PV01 báo cáo kết quả theo file excel, tiêu chí chưa hoàn thành phải xong chậm nhất 14/7/2026.",
+      "Các đơn vị, Công an cấp xã rà soát các chỉ tiêu 4, 9, 12.1, 12.2, 13.2; gửi kết quả kèm tài liệu kiểm chứng về PV01 chậm nhất 15/7/2026."
+    ]}
+  ]
+},
+{
+  id:"cat557", topic:"cat", type:"kh", code:"557/KH-BCĐ",
+  title:"Sửa đổi, bổ sung Kế hoạch 119/KH-BCĐ về hoạt động năm 2026 của Ban Chỉ đạo Bộ Công an về KHCN, ĐMST, CĐS và Đề án 06",
+  issuer:"Ban Chỉ đạo của Bộ Công an (Bộ trưởng ký)", date:"10/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Bổ sung nhóm nhiệm vụ triển khai QĐ 826/QĐ-TTg (Chương trình Đề án 06 giai đoạn 2026–2030) vào KH 119; 02 phụ lục phân công nhiệm vụ Bộ Công an chủ trì, phối hợp.",
+      "Điều chỉnh một số nhiệm vụ: đổi \"Sửa đổi Luật Cư trú\" thành \"Tổng kết, đánh giá 05 năm thi hành Luật Cư trú\"; C06 phát triển VNeID thành hạ tầng số chiến lược.",
+      "Báo cáo hằng tháng về Cơ quan Thường trực BCĐ; nhiệm vụ có hạn trong năm phải tham mưu trước hạn tối thiểu 15 ngày làm việc."
+    ]}
+  ]
+},
+{
+  id:"cat8020", topic:"cat", type:"qd", code:"8020/QĐ-CAT-PV01",
+  title:"Ban hành Bộ tiêu chí và phương pháp chấm điểm, xếp loại hằng tháng người đứng đầu các đơn vị, Công an xã, phường về phát triển KHCN, ĐMST, CĐS và Đề án 06 trong Công an tỉnh",
+  issuer:"Công an tỉnh Gia Lai (Giám đốc ký)", date:"08/7/2026 · hiệu lực từ ngày ký",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Căn cứ QĐ 6162/QĐ-BCA và QĐ 886/QĐ-BCA-V01; thang điểm 100: điểm cơ bản tối đa 70 (trừ điểm khi không đạt), điểm nâng cao tối đa 30.",
+      "Xếp loại: A từ 90 điểm; B 80 đến dưới 90; C 70 đến dưới 80; D 50 đến dưới 70; E dưới 50.",
+      "Trước ngày 16 hằng tháng đơn vị tự đánh giá (kỳ ngày 15 tháng trước đến ngày 14 tháng này); trước ngày 18 các phòng thẩm định; PV01 tổng hợp trình Giám đốc."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "PV06 là một trong các đơn vị thẩm định (cùng PX01, PX03, PH10, PA03, PA05, PA08, PC06, PC07, PC08): phối hợp PV01 thẩm tra, xác minh số liệu theo lĩnh vực được giao."
+    ]}
+  ]
+},
+{
+  id:"cat7860", topic:"cat", type:"cv", code:"7860/CAT-PV01",
+  title:"V/v thực hiện chỉ đạo của Bộ trưởng về nhiệm vụ trọng tâm chuyển đổi số 6 tháng cuối năm 2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"06/7/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 7237/V01-TTTTCH: chuyển đổi số gắn với chuyển đổi mô hình quản trị, điều hành dựa trên dữ liệu; hằng tháng kiểm đếm tiến độ NQ 57.",
+      "PV01 hoàn thiện hạ tầng CNTT, chứng thư số, thiết bị bảo mật trong Quý III/2026; PH10 trang bị máy tính cho từng CBCS trong tháng 12/2026.",
+      "Các phòng triển khai CSDL, nền tảng số theo hệ lực lượng, dữ liệu \"đúng, đủ, sạch, sống\"; thống kê CSDL đã triển khai gửi PV01 trước 10/7/2026."
+    ]}
+  ]
+},
+{
+  id:"cat1267", topic:"cat", type:"cv", code:"1267/PV01-Đ4",
+  title:"V/v đôn đốc thực hiện gửi Báo cáo nhiệm vụ, chỉ tiêu liên quan Nghị quyết 57",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"30/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Đôn đốc thực hiện CV 7196/CAT-PV01: 10 đơn vị (trong đó có PV06) kiểm đếm chỉ tiêu, nhiệm vụ được giao; mỗi đơn vị cử 01 lãnh đạo và 01 cán bộ đầu mối.",
+      "Hạn gửi trước 16h00 ngày 30/6/2026; quá hạn PV01 đề xuất trừ điểm đánh giá xếp loại người đứng đầu."
+    ]}
+  ]
+},
+{
+  id:"cat1251", topic:"cat", type:"cv", code:"1251/PV01-Đ6",
+  title:"V/v triển khai Thông tư số 22/2026/TT-BCA ngày 26/02/2026 của Bộ trưởng Bộ Công an",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"29/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Sao gửi Thông tư 22/2026/TT-BCA quy định chương trình, nhiệm vụ khoa học, công nghệ và đổi mới sáng tạo thuộc phạm vi quản lý của Bộ Công an (toàn văn kèm theo).",
+      "Các phòng, Công an xã, phường nghiên cứu, triển khai; vướng mắc phản ánh về PV01 (Đội Pháp chế và QLKH)."
+    ]}
+  ]
+},
+{
+  id:"cat1250", topic:"cat", type:"cv", code:"1250/PV01-Đ4",
+  title:"V/v lấy ý kiến dự thảo Bộ tiêu chí chấm điểm người đứng đầu các đơn vị, Công an xã, phường trong thực hiện Nghị quyết số 57",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"29/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Gửi dự thảo Quyết định và Phụ lục Bộ tiêu chí chấm điểm, xếp loại hằng tháng người đứng đầu (sau đó ban hành tại QĐ 8020/QĐ-CAT-PV01).",
+      "Góp ý gửi PV01 trong ngày 30/6/2026; không phản hồi được coi là đồng ý; hằng tháng PV01 gửi phụ lục phân khai tiêu chí riêng để tự chấm."
+    ]}
+  ]
+},
+{
+  id:"cat7547", topic:"cat", type:"cv", code:"7547/CAT-PV01",
+  title:"V/v triển khai thực hiện chỉ đạo của Bộ trưởng Bộ Công an",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"29/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 7021/V01-P3: quán triệt Thông báo 74-TB/VPTW và 89-TB/VPTW về KHCN, ĐMST, CĐS.",
+      "Tiếp tục 46 nhiệm vụ, 27 chỉ tiêu theo KH 2900/KH-CAT-PV01 và CV 7196/CAT-PV01; PV01 rà soát vướng mắc NQ 57 báo cáo Bộ trước 30/7/2026."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "PV06 chủ trì đẩy mạnh rà soát, làm sạch dữ liệu án tích, căn cước can phạm và cấp Phiếu lý lịch tư pháp trên VNeID, thời hạn tháng 12/2026.",
+      "Gửi cam kết (lãnh đạo phụ trách, cán bộ chủ trì, lộ trình từng tháng) về PV01 (Đội CNTT) trước 03/7/2026."
+    ]}
+  ]
+},
+{
+  id:"cat7178", topic:"cat", type:"cv", code:"7178/V01-P3",
+  title:"V/v xin ý kiến Kế hoạch 100 ngày triển khai thực hiện Nghị quyết số 57-NQ/TW của Bộ Chính trị",
+  issuer:"Văn phòng Bộ Công an (Phó Chánh Văn phòng ký)", date:"28/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện chỉ đạo của Tổng Bí thư tại Phiên họp chuyên đề về chuyển đổi số trong hệ thống chính trị ngày 25/6/2026, V01 hoàn thành dự thảo Kế hoạch hành động 100 ngày thực hiện NQ 57 của Bộ Công an.",
+      "Đề nghị Công an các đơn vị, địa phương góp ý, gửi V01 trước 14h00 ngày 29/6/2026."
+    ]}
+  ]
+},
+{
+  id:"cat1220", topic:"cat", type:"cv", code:"1220/PV01-Đ4",
+  title:"V/v lấy ý kiến dự thảo kiện toàn Ban Chỉ đạo 57 của Công an tỉnh",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"25/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 6932/CAT-PV01 và QĐ 2430/QĐ-UBND ngày 04/6/2026: kiện toàn Ban Chỉ đạo và các Tổ giúp việc về NQ 57 và Đề án 06.",
+      "Gửi kèm 4 dự thảo: Tờ trình; Quyết định kiện toàn BCĐ; Quyết định ban hành Quy chế; Quy chế làm việc của BCĐ. Tổ trưởng các Tổ giúp việc đề xuất kiện toàn tổ.",
+      "Góp ý gửi PV01 (Đội CNTT) trước 03/7/2026."
+    ]}
+  ]
+},
+{
+  id:"cat1085", topic:"cat", type:"cv", code:"1085/PV01-Đ4",
+  title:"V/v chấm điểm, xếp loại người đứng đầu trong thực hiện Nghị quyết 57 tháng 6/2026",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"12/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 6356/V01-TTTTCH ngày 11/6/2026: tự chấm điểm cho Giám đốc Công an tỉnh tháng 6/2026 theo file excel kèm theo.",
+      "Phân công chấm: PV01 18 chỉ tiêu, PA05 5, PX01 3, PC06 3, PH10 1; PV06 chấm 01 chỉ tiêu 8.8.",
+      "Gửi kết quả kèm tài liệu kiểm chứng về PV01 (Đội CNTT) trước 16/6/2026; gửi trễ sẽ báo cáo Giám đốc xếp loại theo Quy định 05 của Đảng ủy Công an tỉnh."
+    ]}
+  ]
+},
+{
+  id:"cat6817", topic:"cat", type:"bc", code:"6817/BC-CAT-PV01",
+  title:"Báo cáo tình hình thực hiện Nghị quyết số 57-NQ/TW của Bộ Chính trị sau 1 năm 6 tháng triển khai",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"11/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Gửi Sở KH&CN tỉnh phục vụ Hội nghị sơ kết 1 năm 6 tháng thực hiện NQ 57.",
+      "05 chuyển biến lớn: tư duy lãnh đạo (quản trị dựa trên dữ liệu), môi trường làm việc điện tử, chất lượng phục vụ Nhân dân, hệ sinh thái dữ liệu, bảo đảm an ninh mạng.",
+      "Kết quả tiêu biểu: hơn 2,78 triệu công dân được cấp căn cước; trên 2,43 triệu hồ sơ định danh điện tử; trên 2,31 triệu tài khoản VNeID kích hoạt; 100% Công an cấp xã kết nối BCANet, xử lý văn bản toàn trình.",
+      "Nhiệm vụ tới: hoàn thành chỉ tiêu 2026, Trung tâm An ninh mạng tỉnh, làm sạch, đồng bộ dữ liệu với Trung tâm dữ liệu quốc gia, nhân rộng mô hình \"Đơn vị số, Chỉ huy số, Cán bộ số\", ứng dụng AI."
+    ]}
+  ]
+},
+{
+  id:"cat970", topic:"cat", type:"cv", code:"970/PV01-Đ4",
+  title:"V/v phối hợp triển khai các giải pháp, nhiệm vụ của D01",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"01/6/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Tổng Công ty Mobifone (D01) triển khai Chương trình hành động 08/CTr-BCA ngày 06/4/2026 về xây dựng Công an xã, phường, đặc khu vững mạnh, hiện đại.",
+      "D01 đề nghị phối hợp 3 giải pháp cho Công an cấp xã: truyền thanh thông minh; camera AI giám sát an ninh, trật tự; kiosk tiếp dân hỗ trợ dịch vụ công.",
+      "Các đơn vị, xã, phường nghiên cứu, phối hợp, tạo điều kiện cho D01 triển khai."
+    ]}
+  ]
+},
+{
+  id:"cat5979", topic:"cat", type:"cv", code:"5979/CAT-PV01",
+  title:"V/v khẩn trương thực hiện các nhiệm vụ được giao trên hệ thống theodoinq.dcs.vn hoàn thành trong quý II/2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"22/5/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 832-CV/VPTU của Văn phòng Tỉnh ủy: hoàn thành các nhiệm vụ sắp đến hạn trên hệ thống theodoinq.dcs.vn.",
+      "PV01: rà soát, cắt giảm TTHC, thành phần hồ sơ, tái sử dụng dữ liệu (trước 30/6/2026); tham mưu Bộ tiêu chí chấm điểm người đứng đầu (quý II/2026).",
+      "PC06: Danh mục dữ liệu gốc, chủ, mở và Từ điển dữ liệu dùng chung (trước 30/6/2026); Kế hoạch tổng thể Đề án 06 giai đoạn 2026–2030. PX03: sơ kết 01 năm \"Bình dân học vụ số\".",
+      "Các đơn vị cập nhật tiến độ trên hệ thống qua mã QR trong ngày 16 hằng tháng."
+    ]}
+  ]
+},
+{
+  id:"cat5811", topic:"cat", type:"kh", code:"5811/KH-CAT-PV01",
+  title:"Xây dựng mô hình \"Đơn vị số\", \"Chỉ huy số\", \"Cán bộ số\" trong Công an tỉnh Gia Lai",
+  issuer:"Công an tỉnh Gia Lai (Giám đốc ký)", date:"21/5/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Triển khai Bộ tiêu chí theo QĐ 1561/QĐ-BCA-V01 ngày 27/3/2026; kết quả là căn cứ thi đua \"Vì an ninh Tổ quốc\".",
+      "\"Đơn vị số\": cấp tỉnh 6 tiêu chí chính, 30 tiêu chí thành phần; cấp phòng, đội, xã 3 tiêu chí chính, 16 tiêu chí thành phần. \"Chỉ huy số\": lãnh đạo xử lý toàn trình văn bản trên QLVB&ĐH. \"Cán bộ số\": 3 tiêu chí chính, 4 tiêu chí thành phần.",
+      "PH10 bảo đảm 100% CBCS có máy tính trước 30/6/2026; PX01 đào tạo theo Khung năng lực số, Bình dân học vụ số.",
+      "Đạt khi đạt tất cả tiêu chí; tự đánh giá gửi PV01 trước 15/10 hằng năm; PV01 trình phê duyệt trước 01/11, báo cáo Văn phòng Bộ trước 14/11."
+    ]}
+  ]
+},
+{
+  id:"cat5602", topic:"cat", type:"kh", code:"5602/KH-CAT-PV01",
+  title:"Triển khai thực hiện các nhiệm vụ, chỉ tiêu theo Quyết định số 1869/QĐ-UBND ngày 27/4/2026 của Chủ tịch UBND tỉnh",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"15/5/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Cụ thể hóa 9 chỉ tiêu: văn bản xử lý toàn trình trên môi trường điện tử trên 70%; TTHC cung cấp DVCTT toàn trình trên 80%; thông tin chỉ cung cấp một lần trên 80%; 100% CBCS được bồi dưỡng kỹ năng số; mức hài lòng trên 95%...",
+      "Ngày 15 hằng tháng cập nhật kết quả trên QLVB&ĐH gửi PV01, kèm số liệu trích xuất trực tiếp từ hệ thống; chỉ tiêu chậm phải nêu nguyên nhân, giải pháp.",
+      "Không công nhận kết quả nếu hồ sơ xử lý ngoài hệ thống rồi nhập lại, văn bản ký số nhưng vẫn lưu hành song song bản giấy, hoặc chữ ký số được cấp mà không sử dụng."
+    ]}
+  ]
+},
+{
+  id:"cat4885", topic:"cat", type:"cv", code:"4885/CAT-PV01",
+  title:"V/v thông báo kết luận Phiên họp lần thứ hai năm 2026 của Ban Chỉ đạo Chính phủ về phát triển KHCN, ĐMST, CĐS và Đề án 06",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"29/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện kết luận theo Thông báo 167/TB-VPCP: người đứng đầu trực tiếp chỉ đạo khai thác CSDL, kết nối Trung tâm dữ liệu quốc gia, triển khai Tổ công nghệ số cộng đồng.",
+      "Rà soát, cắt giảm thành phần hồ sơ, nâng chất lượng dịch vụ công đối với 23 TTHC và các giấy tờ tích hợp trên VNeID.",
+      "PC06 bảo đảm dữ liệu \"đúng, đủ, sạch, sống\", ban hành Kế hoạch tổng thể Đề án 06 giai đoạn 2026–2030; PX01 vận hành nền tảng \"Bình dân học vụ số trong CAND\"."
+    ]}
+  ]
+},
+{
+  id:"cat4851", topic:"cat", type:"kh", code:"4851/KH-CAT-PC06",
+  title:"Đẩy mạnh công tác tuyên truyền Đề án 06 năm 2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"29/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Tuyên truyền đến CBCS, người dân, doanh nghiệp (chú trọng người cao tuổi, vùng sâu, đồng bào dân tộc thiểu số) về NQ 57, Đề án 06, tiện ích VNeID, định danh mức 2, dịch vụ công trực tuyến.",
+      "PC06 thường trực; PX03 tuyên truyền trong lực lượng; PV01 đăng tin trên Cổng TTĐT; PA05 xử lý thông tin xấu độc.",
+      "Các phòng nghiệp vụ lồng ghép tuyên truyền Đề án 06 trong tiếp nhận, giải quyết TTHC; báo cáo lồng ghép theo KH 3911/KH-CAT-PC06."
+    ]}
+  ]
+},
+{
+  id:"cat702", topic:"cat", type:"cv", code:"702/PV01-Đ6",
+  title:"V/v báo cáo tình hình, định hướng nghiên cứu khoa học và phát triển công nghệ",
+  issuer:"Phòng Tham mưu – Công an tỉnh", date:"28/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện CV 2056/V04-P2 ngày 21/4/2026: thống kê tình hình nghiên cứu KH&PTCN 01/01/2020–30/4/2026 và định hướng nhu cầu nghiên cứu theo biểu mẫu.",
+      "Gửi PV01 (Đội Pháp chế và Quản lý khoa học) trước 10/5/2026."
+    ]}
+  ]
+},
+{
+  id:"cat3911", topic:"cat", type:"kh", code:"3911/KH-CAT-PC06",
+  title:"Thực hiện Đề án 06 trong Công an tỉnh năm 2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"07/4/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện QĐ 961/QĐ-UBND; 10 mục tiêu, trong đó: DVC trực tuyến 80%; số hóa hồ sơ, kết quả TTHC ngành Công an 100%; tái sử dụng dữ liệu trên 80%; 100% công dân đủ điều kiện có danh tính điện tử.",
+      "24 nhiệm vụ cụ thể thuộc 6 nhóm (Phụ lục 1); báo cáo ngày 10 hằng tháng qua PC06."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "Nhiệm vụ 13: PV06 chủ trì \"Rà soát, làm sạch dữ liệu án tích, căn cước can phạm\", phối hợp PC06, Công an xã, phường và TAND tỉnh; sản phẩm là số lượng dữ liệu được làm sạch, kết nối liên thông trên VNeID; thời hạn năm 2026.",
+      "PV06 phối hợp đánh giá mức độ hài lòng khi thực hiện TTHC trên VNeID."
+    ]}
+  ]
+},
+{
+  id:"cat3399", topic:"cat", type:"cv", code:"3399/CAT-PV01",
+  title:"V/v tập trung triển khai quyết liệt các nhiệm vụ thực hiện Nghị quyết 57",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"26/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Năm 2026 Công an tỉnh chủ trì 22 nhiệm vụ NQ 57, 24 nhiệm vụ theo chức năng và 27 chỉ tiêu; tháng 3/2026 còn tiêu chí bị trừ điểm (tỷ lệ kích hoạt định danh điện tử 65,54%, yêu cầu tối thiểu 85%).",
+      "Chuyển từ \"quản lý dựa trên mệnh lệnh hành chính\" sang \"quản trị dựa trên kết quả\"; Tổ giúp việc BCĐ 57 họp hằng tháng.",
+      "Các đơn vị chủ trì tiêu chí chấm điểm người đứng đầu (có PV06) thực hiện theo CV 2985/CAT-PV01, hằng tháng đưa ra lộ trình, giải pháp hoàn thành chỉ tiêu."
+    ]}
+  ]
+},
+{
+  id:"cat3040", topic:"cat", type:"kh", code:"3040/CTr-BCĐ",
+  title:"Chương trình công tác năm 2026 của Ban Chỉ đạo Công an tỉnh về phát triển KHCN, ĐMST, CĐS và Đề án 06",
+  issuer:"Ban Chỉ đạo Công an tỉnh (Giám đốc – Trưởng Ban ký)", date:"26/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Chỉ đạo 14 nhiệm vụ Tỉnh ủy, UBND tỉnh giao và 09 nhiệm vụ BCĐ Bộ Công an giao; nguyên tắc \"rõ người, rõ việc, rõ trách nhiệm, rõ sản phẩm, rõ thời hạn\".",
+      "Họp BCĐ định kỳ hằng quý; Tổ giúp việc (PC06, PV01, PX01) báo cáo trước ngày 10 hằng tháng; PV01 là cơ quan thường trực."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "PV06 chủ trì rà soát, làm sạch dữ liệu án tích, căn cước can phạm và cấp Phiếu lý lịch tư pháp trên VNeID; phối hợp PC06, Công an cấp xã, Văn phòng UBND tỉnh, sở ngành; báo cáo hằng tháng, thời hạn năm 2026.",
+      "Trưởng phòng PV06 là Ủy viên BCĐ 57, chịu trách nhiệm tiến độ nhiệm vụ được giao chủ trì."
+    ]}
+  ]
+},
+{
+  id:"cat3341", topic:"cat", type:"cv", code:"3341/CAT-PV01",
+  title:"V/v triển khai thực hiện Đề án \"Tăng cường chuyển đổi số lĩnh vực công tác dân tộc đến năm 2030\"",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"25/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Triển khai KH 116/KH-UBND ngày 22/3/2026 của UBND tỉnh (gửi kèm).",
+      "PA05 giám sát an toàn thông tin các hệ thống lĩnh vực công tác dân tộc; PC06 triển khai kho dữ liệu công tác dân tộc, kho dữ liệu thống kê 53 dân tộc thiểu số tại Trung tâm dữ liệu quốc gia, gắn với Đề án 06."
+    ]}
+  ]
+},
+{
+  id:"cat2985", topic:"cat", type:"cv", code:"2985/CAT-PV01",
+  title:"V/v thực hiện chấm điểm người đứng đầu trong triển khai Nghị quyết 57",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"13/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Triển khai QĐ 886/QĐ-BCA-V01 (Bộ tiêu chí chấm điểm, xếp loại hằng tháng người đứng đầu, 47 chỉ tiêu); tự đánh giá trước ngày 20 hằng tháng; kết quả là tiêu chí thi đua năm.",
+      "Phân công theo dõi: PV01 31 chỉ tiêu; PX01 5; PH10 3; PA05 3; PC06 2; PX03 1; PX05 1.",
+      "Báo cáo tháng về NQ 57 có thêm mục \"Kết quả chấm điểm người đứng đầu\", gửi PV01 trước ngày 10."
+    ]},
+    {h:"Nhiệm vụ của PV06", items:[
+      "PV06 chủ trì theo dõi, báo cáo chỉ tiêu số 21."
+    ]}
+  ]
+},
+{
+  id:"cat2900", topic:"cat", type:"kh", code:"2900/KH-CAT-PV01",
+  title:"Thực hiện nhiệm vụ đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia năm 2026 của Công an tỉnh",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"12/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Chuyển trọng tâm từ \"tạo dựng, làm sạch dữ liệu\" sang \"hoàn thiện, làm giàu, khai phá, sử dụng dữ liệu\"; rõ người, rõ việc, rõ sản phẩm, rõ thời hạn.",
+      "46 nhiệm vụ cụ thể (13 do Tỉnh ủy, UBND tỉnh giao; 09 do BCĐ Bộ giao; 24 theo chức năng) và 27 chỉ tiêu.",
+      "Báo cáo PV01 trước ngày 10 hằng tháng; sơ kết trước 10/6, tổng kết trước 10/12/2026; Trưởng Công an cấp xã đăng ký tối thiểu 01 nhiệm vụ CĐS."
+    ]}
+  ]
+},
+{
+  id:"cat2775", topic:"cat", type:"kh", code:"2775/KH-CAT-PV01",
+  title:"Phát triển, ứng dụng CNTT trong Công an tỉnh năm 2026",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"09/3/2026",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "100% đơn vị, Công an cấp xã bố trí lực lượng chuyên trách hoặc kiêm nhiệm CNTT; triển khai phần mềm QLVB&ĐH đến 100% CBCS trong năm 2026.",
+      "PV06 phối hợp nhiệm vụ triển khai phần mềm, CSDL phục vụ các lực lượng nghiệp vụ.",
+      "Đánh giá mức độ ứng dụng CNTT theo QĐ 7523/QĐ-BCA (số liệu 01/9/2025–31/8/2026); báo cáo quý, 6 tháng, năm theo mốc quy định."
+    ]}
+  ]
+},
+{
+  id:"cat781", topic:"cat", type:"kh", code:"781/KH-CAT-PV01",
+  title:"Triển khai Khung năng lực số trong Công an tỉnh Gia Lai",
+  issuer:"Công an tỉnh Gia Lai (Phó Giám đốc ký)", date:"21/7/2025",
+  sections:[
+    {h:"Nội dung chính", items:[
+      "Thực hiện KH 402/KH-BCA-H05 và Khung năng lực số CAND (QĐ 8473/QĐ-BCA: 6 năng lực, 15 tiêu chí, 4 mức độ).",
+      "Đến hết 2026, 100% lãnh đạo, CBCS đạt chuẩn năng lực số cơ bản; 2027–2030 đạt chuẩn theo vị trí việc làm.",
+      "Kết quả đánh giá dùng cho đào tạo, quy hoạch, bố trí việc làm, thi đua, khen thưởng, bổ nhiệm; PV01 xây dựng nền tảng học trực tuyến, hệ thống đánh giá năng lực số trên BCANet."
     ]}
   ]
 }
@@ -954,7 +1511,7 @@ function renderDocs(){
   for(const d of list){
     const li=document.createElement("li");
     li.className="folder"; li.dataset.type=d.type;
-    const tab=document.createElement("span"); tab.className="tab"; tab.textContent=(d.label||(d.type==="kh"?(d.code.startsWith("01-KH")?"Kế hoạch":"Văn bản"):TYPES[d.type]))+" "+d.code; li.appendChild(tab);
+    const tab=document.createElement("span"); tab.className="tab"; tab.textContent=(d.label||(d.type==="kh"?(/CTr/.test(d.code)?"Chương trình":/KH/.test(d.code)?"Kế hoạch":"Văn bản"):TYPES[d.type]))+" "+d.code; li.appendChild(tab);
     const body=document.createElement("div"); body.className="f-body";
     const h=document.createElement("h2"); h.className="f-title"; h.textContent=d.title;
     const m=document.createElement("p"); m.className="f-meta"; m.textContent=d.issuer+" – "+d.date;
